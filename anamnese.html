@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anamnesebogen für Neupatienten — Naturheilpraxis Egon Philipp</title>
+  <meta name="description" content="Online-Anamnesebogen der Naturheilpraxis Egon Philipp: Vorerkrankungen, Allergien und Medikamente bequem vorab erfassen — damit im ersten Termin mehr Zeit für Sie bleibt.">
+  <link rel="alternate" hreflang="de" href="https://www.naturheilpraxis-philipp.de/anamnese.html">
+  <link rel="alternate" hreflang="en" href="https://www.naturheilpraxis-philipp.de/en/anamnese.html">
+  <link rel="icon" href="assets/logo.svg?v=2" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css?v=25">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.svg?v=2" alt="Naturheilpraxis Egon Philipp — Heilpraktiker" class="logo-img">
+      </a>
+      <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="leistungen.html">Therapieformen</a></li>
+        <li><a href="kinder.html">Kinder</a></li>
+        <li><a href="zu-meiner-person.html">Über mich</a></li>
+        <li><a href="gesundheitstests.html">Selbsttests</a></li>
+        <li><a href="videos.html">Webinare</a></li>
+        <li><a href="mitglieder.html">Mitglieder</a></li>
+        <li class="lang"><a href="en/anamnese.html" lang="en" title="English version">EN</a></li>
+        <li><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="section" id="anamnese">
+      <div class="container" style="max-width: 860px;">
+        <div class="print-head">
+          <img src="assets/logo.svg?v=2" alt="">
+          <div class="print-adresse">
+            <strong>Naturheilpraxis Egon Philipp</strong><br>
+            Wettersteinstr. 4 &middot; 82024 Taufkirchen<br>
+            Tel. 0174 317 5120 &middot; info@naturheilpraxis-philipp.de
+          </div>
+        </div>
+        <div class="section-head">
+          <p class="section-kicker">Für Neupatienten</p>
+          <h1 class="section-title">Anamnesebogen</h1>
+          <p class="section-intro">Termin anfragen und Fragebogen in einem Schritt: Füllen Sie den Bogen bequem vorab aus — mit Ihren Wunschterminen. Am Ende senden Sie alles per WhatsApp oder E-Mail an die Praxis und können dort direkt Ihre Befunde anhängen. So weiß Egon Philipp schon vor dem ersten Gespräch, worum es geht. Es wird nichts automatisch gespeichert oder übertragen.</p>
+        </div>
+
+        <form class="anamnese-form" id="anamnese-form">
+          <fieldset>
+            <legend>Persönliche Angaben</legend>
+            <div class="grid-2">
+              <label>Name, Vorname
+                <input type="text" name="name" required>
+              </label>
+              <label>Geburtsdatum
+                <input type="text" name="geburtsdatum" placeholder="TT.MM.JJJJ">
+              </label>
+              <label>Telefon
+                <input type="tel" name="telefon">
+              </label>
+              <label>E-Mail
+                <input type="email" name="email">
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Terminwunsch</legend>
+            <div class="grid-2">
+              <label>Wunschtermin 1
+                <input type="text" name="wunsch1" placeholder="z. B. Dienstag, 24.03. vormittags">
+              </label>
+              <label>Wunschtermin 2
+                <input type="text" name="wunsch2" placeholder="z. B. Donnerstag, 26.03. ab 16 Uhr">
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Ihr Anliegen</legend>
+            <label>Was führt Sie zu mir? Welche Beschwerden haben Sie, seit wann?
+              <textarea name="anliegen" required></textarea>
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Bekannte Diagnosen</legend>
+            <div class="check-grid">
+              <label><input type="checkbox" name="diagnose" value="Bluthochdruck"> Bluthochdruck</label>
+              <label><input type="checkbox" name="diagnose" value="Diabetes"> Diabetes</label>
+              <label><input type="checkbox" name="diagnose" value="Schilddrüsenerkrankung"> Schilddrüsenerkrankung</label>
+              <label><input type="checkbox" name="diagnose" value="Herz-Kreislauf-Erkrankung"> Herz-Kreislauf-Erkrankung</label>
+              <label><input type="checkbox" name="diagnose" value="Asthma / Atemwege"> Asthma / Atemwege</label>
+              <label><input type="checkbox" name="diagnose" value="Magen-Darm-Beschwerden"> Magen-Darm-Beschwerden</label>
+              <label><input type="checkbox" name="diagnose" value="Rheuma / Gelenkerkrankung"> Rheuma / Gelenke</label>
+              <label><input type="checkbox" name="diagnose" value="Migräne / Kopfschmerzen"> Migräne / Kopfschmerzen</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Gesundheitsgeschichte</legend>
+            <label>Weitere Vorerkrankungen
+              <textarea name="vorerkrankungen"></textarea>
+            </label>
+            <label>Operationen und Unfälle (mit Jahr)
+              <textarea name="operationen"></textarea>
+            </label>
+            <label>Allergien und Unverträglichkeiten
+              <textarea name="allergien"></textarea>
+            </label>
+            <label>Aktuelle Medikamente (auch rezeptfreie und Nahrungsergänzungsmittel)
+              <textarea name="medikamente"></textarea>
+            </label>
+            <label>Bekannte Erkrankungen in der Familie
+              <textarea name="familie"></textarea>
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Lebensstil</legend>
+            <div class="grid-2">
+              <label>Rauchen
+                <select name="rauchen"><option></option><option>Nein</option><option>Gelegentlich</option><option>Täglich</option></select>
+              </label>
+              <label>Alkohol
+                <select name="alkohol"><option></option><option>Selten / nie</option><option>Mäßig</option><option>Regelmäßig</option></select>
+              </label>
+              <label>Bewegung / Sport
+                <select name="bewegung"><option></option><option>Selten</option><option>1–2× pro Woche</option><option>3× oder öfter</option></select>
+              </label>
+              <label>Schlaf
+                <select name="schlaf"><option></option><option>Gut und erholsam</option><option>Wechselhaft</option><option>Schlecht</option></select>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Sonstiges</legend>
+            <label>Gibt es etwas, das ich noch wissen sollte? (z. B. Schwangerschaft, laufende Behandlungen, Wünsche)
+              <textarea name="sonstiges"></textarea>
+            </label>
+          </fieldset>
+
+          <p><button type="submit" class="btn btn-primary">Zusammenfassung erstellen</button></p>
+        </form>
+
+        <div class="summary-card" id="summary" hidden>
+          <h3>Ihre Zusammenfassung</h3>
+          <pre id="summary-text"></pre>
+          <div class="actions">
+            <a href="#" class="btn btn-whatsapp" id="summary-wa" target="_blank" rel="noopener">Per WhatsApp senden</a>
+            <a href="#" class="btn btn-primary" id="summary-mail">Per E-Mail senden</a>
+            <button type="button" class="btn btn-ghost" id="summary-print">Drucken / als PDF speichern</button>
+            <button type="button" class="btn btn-ghost" id="summary-edit">Angaben bearbeiten</button>
+          </div>
+          <div class="notice" style="margin-top: 1.2rem;">
+            <strong>Befunde gleich mitschicken:</strong> Nach dem Klick öffnet sich WhatsApp bzw. Ihr E-Mail-Programm mit dem fertigen Fragebogen. Hängen Sie dort einfach Ihre aktuellen Unterlagen an, bevor Sie absenden — z.&nbsp;B. Laborwerte, Arztbriefe, Röntgen- oder MRT-Bilder (als Foto oder PDF). So liegt alles schon vor dem ersten Termin in der Praxis vor.
+          </div>
+          <p style="margin-top: 1rem; color: var(--muted); font-size: 0.85rem;">Gesendet wird erst, wenn Sie in WhatsApp bzw. Ihrem E-Mail-Programm selbst auf „Senden" klicken. Hinweis: E-Mails und Messenger sind in der Regel nicht Ende-zu-Ende auf dem Praxisserver verschlüsselt gespeichert. Wenn Ihnen das bei Gesundheitsdaten nicht recht ist, drucken Sie die Zusammenfassung einfach aus und bringen sie mit den Befunden zum Termin mit.</p>
+        </div>
+
+        <div class="notice" style="margin-top: 2rem;">
+          <strong>Datenschutz:</strong> Dieser Bogen wird vollständig in Ihrem Browser ausgefüllt. Es werden keine Angaben gespeichert oder automatisch übertragen — die Daten verlassen Ihr Gerät nur, wenn Sie selbst auf „An die Praxis senden" klicken und die E-Mail abschicken.
+        </div>
+      </div>
+        <div class="print-foot">
+          Naturheilpraxis Egon Philipp &middot; Wettersteinstr. 4 &middot; 82024 Taufkirchen &middot; Tel. 0174 317 5120 &middot; www.naturheilpraxis-philipp.de<br>
+          Diese Auswertung dient der Orientierung und ersetzt keine Diagnose oder Behandlung durch Arzt oder Heilpraktiker.
+        </div>    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Naturheilpraxis Egon Philipp</h4>
+        <p>Wettersteinstr. 4<br>82024 Taufkirchen</p>
+        <p style="margin-top: 0.7rem;">
+          Telefon: <a href="tel:+491743175120">0174 317 5120</a><br>
+          E-Mail: <a href="mailto:info@naturheilpraxis-philipp.de">info@naturheilpraxis-philipp.de</a>
+        </p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="leistungen.html">Therapieformen</a></li>
+          <li><a href="kinder.html">Kinder</a></li>
+          <li><a href="zu-meiner-person.html">Über mich</a></li>
+          <li><a href="gesundheitstests.html">Selbsttests</a></li>
+          <li><a href="anamnese.html">Anamnesebogen</a></li>
+          <li><a href="videos.html">Webinare &amp; Workshops</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <div class="container">
+        <p>Hinweis: Die hier vorgestellten naturheilkundlichen Verfahren sind Methoden der Erfahrungsheilkunde. Sie sind teilweise wissenschaftlich nicht anerkannt und ersetzen keinen Besuch beim Arzt.</p>
+        <p>© <span id="year"></span> Naturheilpraxis Egon Philipp</p>
+      </div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-fab" href="https://wa.me/491743175120?text=Guten%20Tag%20Herr%20Philipp%2C%20ich%20m%C3%B6chte%20gerne%20einen%20Termin%20vereinbaren." target="_blank" rel="noopener" aria-label="Termin per WhatsApp vereinbaren" title="Termin per WhatsApp">
+    <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+  </a>
+  <script src="js/main.js?v=2"></script>
+  <script>
+  // Anamnesebogen: Auswertung nur im Browser, Versand ausschließlich per
+  // Nutzeraktion (mailto). Keine Speicherung, keine automatische Übertragung.
+  (function () {
+    var root = (document.currentScript && document.currentScript.closest('.page')) || document;
+    var form = root.querySelector('#anamnese-form');
+    if (!form || form.dataset.init) return;
+    form.dataset.init = '1';
+    var summary = root.querySelector('#summary');
+    var summaryText = root.querySelector('#summary-text');
+
+    function val(name) {
+      var el = form.querySelector('[name="' + name + '"]');
+      return el && el.value.trim() ? el.value.trim() : '—';
+    }
+
+    function build() {
+      var diagnosen = Array.prototype.map.call(form.querySelectorAll('[name="diagnose"]:checked'), function (c) { return c.value; });
+      return [
+        'ANAMNESEBOGEN — Naturheilpraxis Egon Philipp',
+        '',
+        'Name: ' + val('name'),
+        'Geburtsdatum: ' + val('geburtsdatum'),
+        'Telefon: ' + val('telefon'),
+        'E-Mail: ' + val('email'),
+        '',
+        'TERMINWUNSCH:',
+        '1) ' + val('wunsch1'),
+        '2) ' + val('wunsch2'),
+        '',
+        'ANLIEGEN / BESCHWERDEN:',
+        val('anliegen'),
+        '',
+        'BEKANNTE DIAGNOSEN: ' + (diagnosen.length ? diagnosen.join(', ') : '—'),
+        '',
+        'WEITERE VORERKRANKUNGEN:',
+        val('vorerkrankungen'),
+        '',
+        'OPERATIONEN / UNFÄLLE:',
+        val('operationen'),
+        '',
+        'ALLERGIEN / UNVERTRÄGLICHKEITEN:',
+        val('allergien'),
+        '',
+        'AKTUELLE MEDIKAMENTE:',
+        val('medikamente'),
+        '',
+        'ERKRANKUNGEN IN DER FAMILIE:',
+        val('familie'),
+        '',
+        'LEBENSSTIL:',
+        'Rauchen: ' + val('rauchen') + ' | Alkohol: ' + val('alkohol') + ' | Bewegung: ' + val('bewegung') + ' | Schlaf: ' + val('schlaf'),
+        '',
+        'SONSTIGES:',
+        val('sonstiges')
+      ].join('\n');
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var text = build();
+      summaryText.textContent = text;
+      root.querySelector('#summary-mail').href = 'mailto:info@naturheilpraxis-philipp.de?subject=' + encodeURIComponent('Anamnesebogen — ' + val('name')) + '&body=' + encodeURIComponent('Guten Tag Herr Philipp,\n\nanbei mein ausgefüllter Anamnesebogen:\n\n' + text + '\n\nMit freundlichen Grüßen');
+      root.querySelector('#summary-wa').href = 'https://wa.me/491743175120?text=' + encodeURIComponent('Guten Tag Herr Philipp, hier mein Anamnesebogen mit Terminwunsch:\n\n' + text);
+      form.hidden = true;
+      summary.hidden = false;
+      summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    root.querySelector('#summary-print').addEventListener('click', function () { window.print(); });
+    root.querySelector('#summary-edit').addEventListener('click', function () {
+      summary.hidden = true;
+      form.hidden = false;
+      form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  })();
+  </script>
+</body>
+</html>

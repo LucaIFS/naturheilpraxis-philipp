@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gesundheitstest-Center — Naturheilpraxis Egon Philipp</title>
+  <meta name="description" content="Kostenlose Selbsttests zur Orientierung: Stress & Erschöpfung, Allergie, Rücken, Schlaf & innere Unruhe. Fragen beantworten, Einschätzung erhalten — anonym, ohne Datenspeicherung.">
+  <link rel="alternate" hreflang="de" href="https://www.naturheilpraxis-philipp.de/gesundheitstests.html">
+  <link rel="alternate" hreflang="en" href="https://www.naturheilpraxis-philipp.de/en/gesundheitstests.html">
+  <link rel="icon" href="assets/logo.svg?v=2" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css?v=25">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo.svg?v=2" alt="Naturheilpraxis Egon Philipp — Heilpraktiker" class="logo-img">
+      </a>
+      <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="leistungen.html">Therapieformen</a></li>
+        <li><a href="kinder.html">Kinder</a></li>
+        <li><a href="zu-meiner-person.html">Über mich</a></li>
+        <li><a href="gesundheitstests.html" aria-current="page">Selbsttests</a></li>
+        <li><a href="videos.html">Webinare</a></li>
+        <li><a href="mitglieder.html">Mitglieder</a></li>
+        <li class="lang"><a href="en/gesundheitstests.html" lang="en" title="English version">EN</a></li>
+        <li><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="section" id="test-center">
+      <div class="container">
+        <div class="print-head">
+          <img src="assets/logo.svg?v=2" alt="">
+          <div class="print-adresse">
+            <strong>Naturheilpraxis Egon Philipp</strong><br>
+            Wettersteinstr. 4 &middot; 82024 Taufkirchen<br>
+            Tel. 0174 317 5120 &middot; info@naturheilpraxis-philipp.de
+          </div>
+        </div>
+        <div class="section-head">
+          <p class="section-kicker">Ihr erster Schritt</p>
+          <h1 class="section-title">Gesundheitstest-Center</h1>
+          <p class="section-intro">Wie belastet sind Sie wirklich? Beantworten Sie acht kurze Fragen und erhalten Sie sofort eine erste Einschätzung — kostenlos und anonym. Ihre Antworten bleiben auf Ihrem Gerät und werden nirgends gespeichert.</p>
+        </div>
+
+        <!-- Test-Auswahl -->
+        <div class="cards test-chooser">
+          <article class="card">
+            <div class="card-icon"><img src="assets/icon-burnout.svg?v=4" alt=""></div>
+            <h3>Stress &amp; Erschöpfung</h3>
+            <p>Funktionieren Sie nur noch — oder leben Sie? Acht Fragen zu Belastung, Schlaf und innerer Reserve.</p>
+            <p style="margin-top: 0.8rem;"><button class="btn btn-primary btn-small" data-test="stress">Test starten</button></p>
+          </article>
+          <article class="card">
+            <div class="card-icon"><img src="assets/icon-allergien.svg?v=4" alt=""></div>
+            <h3>Allergie-Anzeichen</h3>
+            <p>Niesen, juckende Augen, empfindliche Haut? Prüfen Sie, ob Ihre Beschwerden auf eine Allergie hindeuten könnten.</p>
+            <p style="margin-top: 0.8rem;"><button class="btn btn-primary btn-small" data-test="allergie">Test starten</button></p>
+          </article>
+          <article class="card">
+            <div class="card-icon"><img src="assets/icon-ruecken.svg?v=4" alt=""></div>
+            <h3>Rücken-Check</h3>
+            <p>Verspannt, steif, schmerzhaft? Acht Fragen zu Rücken, Nacken und Ihrem Alltag im Sitzen.</p>
+            <p style="margin-top: 0.8rem;"><button class="btn btn-primary btn-small" data-test="ruecken">Test starten</button></p>
+          </article>
+          <article class="card">
+            <div class="card-icon"><img src="assets/icon-cholincitrat.svg?v=4" alt=""></div>
+            <h3>Schlaf &amp; innere Unruhe</h3>
+            <p>Gedankenkarussell statt Tiefschlaf? Finden Sie heraus, wie es um Ihre Erholung steht.</p>
+            <p style="margin-top: 0.8rem;"><button class="btn btn-primary btn-small" data-test="schlaf">Test starten</button></p>
+          </article>
+        </div>
+
+        <!-- Quiz (wird per JS gefüllt) -->
+        <div class="quiz" hidden></div>
+
+        <div class="notice" style="margin-top: 2.5rem;">
+          <strong>Wichtiger Hinweis:</strong> Diese Selbsttests sind eine Orientierungshilfe und ersetzen keine Diagnose, Untersuchung oder Behandlung durch Arzt oder Heilpraktiker. Bei akuten oder starken Beschwerden wenden Sie sich bitte an Ihren Arzt — im Notfall an den Notruf 112. Ihre Antworten werden ausschließlich in Ihrem Browser ausgewertet und nicht gespeichert oder übertragen.
+        </div>
+      </div>
+        <div class="print-foot">
+          Naturheilpraxis Egon Philipp &middot; Wettersteinstr. 4 &middot; 82024 Taufkirchen &middot; Tel. 0174 317 5120 &middot; www.naturheilpraxis-philipp.de<br>
+          Diese Auswertung dient der Orientierung und ersetzt keine Diagnose oder Behandlung durch Arzt oder Heilpraktiker.
+        </div>    </section>
+
+    <section class="cta-band">
+      <div class="container">
+        <h2>Ihr Ergebnis wirft Fragen auf?</h2>
+        <p>Im kostenlosen Online-Kennenlerngespräch besprechen wir unverbindlich, was dahinterstecken kann und welche Wege es gibt.</p>
+        <a href="kontakt.html#online" class="btn">Kennenlerngespräch vereinbaren</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Naturheilpraxis Egon Philipp</h4>
+        <p>Wettersteinstr. 4<br>82024 Taufkirchen</p>
+        <p style="margin-top: 0.7rem;">
+          Telefon: <a href="tel:+491743175120">0174 317 5120</a><br>
+          E-Mail: <a href="mailto:info@naturheilpraxis-philipp.de">info@naturheilpraxis-philipp.de</a>
+        </p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="leistungen.html">Therapieformen</a></li>
+          <li><a href="kinder.html">Kinder</a></li>
+          <li><a href="zu-meiner-person.html">Über mich</a></li>
+          <li><a href="gesundheitstests.html">Selbsttests</a></li>
+          <li><a href="anamnese.html">Anamnesebogen</a></li>
+          <li><a href="videos.html">Webinare &amp; Workshops</a></li>
+          <li><a href="mitglieder.html">Mitgliederbereich</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <div class="container">
+        <p>Hinweis: Die hier vorgestellten naturheilkundlichen Verfahren sind Methoden der Erfahrungsheilkunde. Sie sind teilweise wissenschaftlich nicht anerkannt und ersetzen keinen Besuch beim Arzt. Die Selbsttests dienen der Orientierung und stellen keine Diagnose dar.</p>
+        <p>© <span id="year"></span> Naturheilpraxis Egon Philipp</p>
+      </div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-fab" href="https://wa.me/491743175120?text=Guten%20Tag%20Herr%20Philipp%2C%20ich%20m%C3%B6chte%20gerne%20einen%20Termin%20vereinbaren." target="_blank" rel="noopener" aria-label="Termin per WhatsApp vereinbaren" title="Termin per WhatsApp">
+    <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+  </a>
+  <script src="js/main.js?v=2"></script>
+  <script>
+  // Gesundheitstest-Center: reine Browser-Auswertung, keine Datenspeicherung.
+  // Ergebnisse sind Orientierung, bewusst keine Diagnose-Formulierungen (HWG).
+  (function () {
+    var root = (document.currentScript && document.currentScript.closest('.page')) || document;
+    var center = root.querySelector('#test-center');
+    if (!center || center.dataset.init) return;
+    center.dataset.init = '1';
+
+    var T = {
+      stress: {
+        titel: 'Stress & Erschöpfung',
+        fragen: [
+          'Fühlen Sie sich morgens schon erschöpft, bevor der Tag begonnen hat?',
+          'Fällt es Ihnen schwer, nach Feierabend gedanklich abzuschalten?',
+          'Reagieren Sie gereizter auf Kleinigkeiten als früher?',
+          'Leiden Sie unter Ein- oder Durchschlafproblemen?',
+          'Haben Sie das Gefühl, den Anforderungen nicht mehr gerecht zu werden?',
+          'Vernachlässigen Sie Hobbys, Freunde oder Bewegung aus Zeitmangel?',
+          'Spüren Sie körperliche Beschwerden wie Verspannungen, Kopfschmerzen oder Magendruck?',
+          'Fühlen Sie sich innerlich leer oder freudlos?'
+        ],
+        ergebnis: [
+          { max: 4, band: 'gruen', label: 'Im Gleichgewicht', text: 'Ihre Antworten deuten auf ein gutes Gleichgewicht hin. Damit das so bleibt: Prävention ist der beste Schutz — gönnen Sie sich weiterhin bewusste Pausen und Bewegung.' },
+          { max: 10, band: 'gelb', label: 'Erhöhte Belastung', text: 'Ihre Antworten deuten auf eine erhöhte Belastung hin. Jetzt ist ein guter Zeitpunkt, gegenzusteuern — bevor aus Anspannung Erschöpfung wird. Ansätze wie Ordnungstherapie, Akupunktur oder Entspannungsverfahren können unterstützen.' },
+          { max: 16, band: 'orange', label: 'Deutliche Anzeichen', text: 'Ihre Antworten zeigen deutliche Anzeichen von Überlastung und Erschöpfung. Bitte nehmen Sie das ernst und holen Sie sich zeitnah Unterstützung — gerne bespreche ich mit Ihnen, welche Wege es gibt. Bei anhaltenden oder starken Beschwerden lassen Sie sich bitte auch ärztlich untersuchen.' }
+        ]
+      },
+      allergie: {
+        titel: 'Allergie-Anzeichen',
+        fragen: [
+          'Niesen Sie in bestimmten Jahreszeiten auffällig häufig?',
+          'Jucken oder tränen Ihre Augen im Freien?',
+          'Ist Ihre Nase häufig verstopft oder läuft — ohne Erkältung?',
+          'Reagiert Ihre Haut empfindlich mit Rötung, Juckreiz oder Quaddeln?',
+          'Verschlimmern sich Beschwerden bei Staub, Tierkontakt oder bestimmten Lebensmitteln?',
+          'Fühlen Sie sich in der Pollensaison müde und abgeschlagen?',
+          'Greifen Sie regelmäßig zu Allergie-Tabletten (Antihistaminika)?',
+          'Gibt es Allergien in Ihrer Familie?'
+        ],
+        ergebnis: [
+          { max: 4, band: 'gruen', label: 'Wenig Anzeichen', text: 'Ihre Antworten zeigen derzeit wenige Hinweise auf eine allergische Belastung. Beobachten Sie Veränderungen — und stärken Sie Ihr Immunsystem präventiv.' },
+          { max: 10, band: 'gelb', label: 'Mögliche Belastung', text: 'Ihre Antworten könnten auf eine allergische Veranlagung hindeuten. Eine naturheilkundliche Abklärung — etwa mit Kinesiologie und begleitender Eigenbluttherapie — kann helfen, Auslöser zu erkennen und das Immunsystem umzustimmen.' },
+          { max: 16, band: 'orange', label: 'Deutliche Hinweise', text: 'Ihre Antworten zeigen deutliche Hinweise auf eine allergische Belastung, die Ihre Lebensqualität spürbar einschränkt. Statt nur Symptome zu unterdrücken, lohnt der Blick auf die Ursachen — sprechen Sie mich gerne darauf an. Eine schulmedizinische Allergie-Diagnostik ist ergänzend sinnvoll.' }
+        ]
+      },
+      ruecken: {
+        titel: 'Rücken-Check',
+        fragen: [
+          'Haben Sie Schmerzen im unteren Rücken nach längerem Sitzen?',
+          'Fühlt sich Ihr Nacken- und Schulterbereich verspannt an?',
+          'Schmerzt es beim Bücken, Heben oder Drehen?',
+          'Strahlen Schmerzen in Beine oder Arme aus?',
+          'Wachen Sie morgens mit Rückenschmerzen auf?',
+          'Bewegen Sie sich weniger als 30 Minuten am Tag?',
+          'Arbeiten Sie überwiegend im Sitzen?',
+          'Schränken die Beschwerden Ihren Alltag ein?'
+        ],
+        ergebnis: [
+          { max: 4, band: 'gruen', label: 'Stabiler Rücken', text: 'Ihr Rücken scheint gut zurechtzukommen. Bleiben Sie in Bewegung — das ist die beste Vorsorge gegen Rückenbeschwerden.' },
+          { max: 10, band: 'gelb', label: 'Erste Warnsignale', text: 'Ihr Rücken sendet erste Warnsignale. Jetzt gegensteuern lohnt sich: Manuelle Verfahren wie Chiropraktik oder die sanfte Bowen-Therapie können Blockaden lösen, bevor sie chronisch werden.' },
+          { max: 16, band: 'orange', label: 'Deutliche Beschwerden', text: 'Ihre Antworten zeigen deutliche Rückenbeschwerden, die Ihren Alltag belasten. Eine gründliche Untersuchung ist der erste Schritt — gerne schauen wir gemeinsam, wo die Ursachen liegen. Bei ausstrahlenden Schmerzen, Taubheit oder Lähmungserscheinungen lassen Sie sich bitte zeitnah ärztlich untersuchen.' }
+        ]
+      },
+      schlaf: {
+        titel: 'Schlaf & innere Unruhe',
+        fragen: [
+          'Brauchen Sie abends länger als 30 Minuten zum Einschlafen?',
+          'Wachen Sie nachts auf und finden schwer in den Schlaf zurück?',
+          'Kreisen abends die Gedanken um Aufgaben und Sorgen?',
+          'Fühlen Sie sich tagsüber unausgeruht, obwohl Sie geschlafen haben?',
+          'Spüren Sie innere Unruhe oder Nervosität ohne konkreten Anlass?',
+          'Brauchen Sie Kaffee oder Energydrinks, um durch den Tag zu kommen?',
+          'Bemerken Sie Herzklopfen oder flache Atmung in Ruhephasen?',
+          'Sind Bildschirm oder Handy fester Teil Ihres Abends im Bett?'
+        ],
+        ergebnis: [
+          { max: 4, band: 'gruen', label: 'Erholsamer Schlaf', text: 'Ihr Schlaf scheint Ihnen die Erholung zu geben, die Sie brauchen. Weiter so — guter Schlaf ist eine der wichtigsten Säulen der Gesundheit.' },
+          { max: 10, band: 'gelb', label: 'Gestörte Erholung', text: 'Ihre Erholung ist spürbar beeinträchtigt. Ihr vegetatives Nervensystem könnte Unterstützung brauchen, um wieder in die Balance zu finden — etwa durch Entspannungsverfahren oder unterstützende Infusionstherapie. Sprechen wir darüber.' },
+          { max: 16, band: 'orange', label: 'Deutliche Unruhe', text: 'Ihre Antworten zeigen deutliche Zeichen von innerer Unruhe und gestörtem Schlaf — auf Dauer zehrt das an Körper und Geist. Holen Sie sich Unterstützung, um den Kreislauf zu durchbrechen. Bei anhaltenden Schlafstörungen ist auch eine ärztliche Abklärung sinnvoll.' }
+        ]
+      }
+    };
+
+    var antworten = [
+      { label: 'Selten oder nie', punkte: 0 },
+      { label: 'Manchmal', punkte: 1 },
+      { label: 'Häufig', punkte: 2 }
+    ];
+
+    var chooser = center.querySelector('.test-chooser');
+    var quiz = center.querySelector('.quiz');
+    var state = null;
+
+    function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+    function render() {
+      var t = T[state.id];
+      if (state.i < t.fragen.length) {
+        var pct = Math.round((state.i / t.fragen.length) * 100);
+        quiz.innerHTML =
+          '<div class="quiz-progress"><span style="width:' + pct + '%"></span></div>' +
+          '<p class="quiz-count">' + esc(t.titel) + ' — Frage ' + (state.i + 1) + ' von ' + t.fragen.length + '</p>' +
+          '<p class="quiz-question">' + esc(t.fragen[state.i]) + '</p>' +
+          '<div class="quiz-answers">' +
+          antworten.map(function (a, idx) {
+            return '<button type="button" data-punkte="' + a.punkte + '">' + esc(a.label) + '</button>';
+          }).join('') +
+          '</div>' +
+          (state.i > 0 ? '<button type="button" class="quiz-back">← Zurück zur vorherigen Frage</button>' : '<button type="button" class="quiz-back">← Anderen Test wählen</button>');
+        quiz.querySelectorAll('.quiz-answers button').forEach(function (b) {
+          b.addEventListener('click', function () {
+            state.verlauf.push(parseInt(b.dataset.punkte, 10));
+            state.i++;
+            render();
+          });
+        });
+        quiz.querySelector('.quiz-back').addEventListener('click', function () {
+          if (state.i > 0) { state.i--; state.verlauf.pop(); render(); }
+          else { quiz.hidden = true; chooser.hidden = false; state = null; }
+        });
+      } else {
+        var summe = state.verlauf.reduce(function (a, b) { return a + b; }, 0);
+        var erg = t.ergebnis.filter(function (e) { return summe <= e.max; })[0] || t.ergebnis[t.ergebnis.length - 1];
+        var zeilen = t.fragen.map(function (f, i) {
+          return '- ' + f + ' → ' + antworten[state.verlauf[i]].label;
+        });
+        var mailBody = 'Guten Tag Herr Philipp,\n\nich habe auf Ihrer Website den Selbsttest „' + t.titel + '" gemacht.\n\nErgebnis: ' + erg.label + ' (' + summe + ' von 16 Punkten)\n\nMeine Antworten:\n' + zeilen.join('\n') + '\n\nIch würde gerne einen Termin vereinbaren.\nWunschtermin 1:\nWunschtermin 2:\n\nMit freundlichen Grüßen';
+        var mailHref = 'mailto:info@naturheilpraxis-philipp.de?subject=' + encodeURIComponent('Selbsttest-Ergebnis: ' + t.titel) + '&body=' + encodeURIComponent(mailBody);
+        quiz.innerHTML =
+          '<div class="quiz-result">' +
+          '<p class="quiz-count">' + esc(t.titel) + ' — Ihr Ergebnis</p>' +
+          '<span class="result-badge result-' + erg.band + '">' + esc(erg.label) + '</span>' +
+          '<p>' + esc(erg.text) + '</p>' +
+          '<p style="margin-top:0.8rem;color:var(--muted);font-size:0.88rem;">Diese Einschätzung ist eine Orientierungshilfe und keine Diagnose.</p>' +
+          '<div class="actions">' +
+          '<a href="kontakt.html" class="btn btn-primary">Termin bei Egon Philipp vereinbaren</a>' +
+          '<a href="' + mailHref + '" class="btn btn-ghost">Ergebnis an die Praxis senden</a>' +
+          '<button type="button" class="btn btn-ghost quiz-print">Drucken / als PDF speichern</button>' +
+          '</div>' +
+          '<p style="margin-top:0.8rem;color:var(--muted);font-size:0.85rem;">Der Versand öffnet Ihr eigenes E-Mail-Programm — gesendet wird erst, wenn Sie dort auf „Senden" klicken. So liegt Ihr Ergebnis schon vor dem ersten Gespräch in der Praxis vor.</p>' +
+          '<button type="button" class="quiz-back">← Zurück zur Testauswahl</button>' +
+          '</div>';
+        quiz.querySelector('.quiz-print').addEventListener('click', function () { window.print(); });
+        quiz.querySelector('.quiz-back').addEventListener('click', function () {
+          quiz.hidden = true; chooser.hidden = false; state = null;
+        });
+      }
+    }
+
+    center.querySelectorAll('[data-test]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        state = { id: btn.dataset.test, i: 0, verlauf: [] };
+        chooser.hidden = true;
+        quiz.hidden = false;
+        render();
+        quiz.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

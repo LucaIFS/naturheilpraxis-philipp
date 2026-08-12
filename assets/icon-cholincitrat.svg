@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="310 0 210 217" width="210px" height="217px">
+  <style type="text/css">
+    .br{fill:none;stroke:#00802B;stroke-width:6;stroke-miterlimit:10;}
+    .bag-o{fill:#45A9A0;stroke:#00802B;stroke-width:4;stroke-linejoin:round;}
+    .lin{fill:none;stroke:#00802B;stroke-width:3;stroke-linecap:round;}
+    .drop{fill:#45A9A0;stroke:#00802B;stroke-width:3;stroke-linejoin:round;}
+    .acc{fill:none;stroke:#9AE902;stroke-width:2.3;stroke-linecap:round;stroke-miterlimit:10;}
+    .dot{fill:#9AE902;}
+  </style>
+  <!-- Eck-Klammern im Stil der bestehenden Icons -->
+  <polyline class="br" points="318,80 318,38 360,38"/>
+  <polyline class="br" points="512,140 512,182 470,182"/>
+  <!-- Aufhängung -->
+  <line class="lin" x1="412" y1="22" x2="412" y2="38"/>
+  <path class="lin" d="M404,30 q8,-10 16,0"/>
+  <!-- Infusionsbeutel -->
+  <rect class="bag-o" x="374" y="38" width="76" height="96" rx="14"/>
+  <line class="lin" x1="384" y1="86" x2="440" y2="86"/>
+  <line class="lin" x1="384" y1="104" x2="424" y2="104"/>
+  <!-- Schlauch -->
+  <path class="lin" d="M412,134 v14 q0,10 10,10 h6 q10,0 10,10 v10"/>
+  <!-- Tropfen -->
+  <path class="drop" d="M438,192 q-8,12 0,18 q8,-6 0,-18 z"/>
+  <!-- Akzente: Ruhe/Entspannung -->
+  <line class="acc" x1="338" y1="110" x2="348" y2="110"/>
+  <line class="acc" x1="343" y1="105" x2="343" y2="115"/>
+  <path class="acc" d="M478,58 q6,-6 12,0 q-6,6 -12,0"/>
+  <path class="acc" d="M330,150 q5,-5 10,0"/>
+  <circle class="dot" cx="465" cy="30" r="4"/>
+  <circle class="dot" cx="352" cy="180" r="3.5"/>
+</svg>

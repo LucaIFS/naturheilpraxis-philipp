@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Members Area — Naturopathic Practice Egon Philipp</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="../assets/logo.svg?v=2" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/style.css?v=25">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="index.html" class="nav-logo">
+        <img src="../assets/logo.svg?v=2" alt="Naturopathic Practice Egon Philipp — Heilpraktiker" class="logo-img">
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="leistungen.html">Treatments</a></li>
+        <li><a href="kinder.html">Children</a></li>
+        <li><a href="zu-meiner-person.html">About me</a></li>
+        <li><a href="gesundheitstests.html">Self-tests</a></li>
+        <li><a href="videos.html">Webinars</a></li>
+        <li><a href="mitglieder.html" aria-current="page">Members</a></li>
+        <li class="lang"><a href="../mitglieder.html" lang="de" title="Deutsche Version">DE</a></li>
+        <li><a href="kontakt.html" class="btn btn-primary btn-small">Book an appointment</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== Login ===== -->
+    <section class="section" id="login">
+      <div class="container">
+        <div class="contact-card login-card">
+          <h3>Member login</h3>
+          <p style="color: var(--muted); font-size: 0.95rem;">You receive your login credentials when you register for a webinar or online workshop.</p>
+          <form class="login-form" id="login-form">
+            <label>Username
+              <input type="text" id="login-user" autocomplete="username" required>
+            </label>
+            <label>Password
+              <input type="password" id="login-pass" autocomplete="current-password" required>
+            </label>
+            <p class="login-error" id="login-error">Username or password is incorrect. Please try again.</p>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+          </form>
+          <p style="margin-top: 1.2rem; color: var(--muted); font-size: 0.85rem;">
+            No credentials yet? <a href="videos.html#webinare">See webinars &amp; workshops</a><br>
+            Forgotten your credentials? <a href="mailto:info@naturheilpraxis-philipp.de?subject=Members%20area%20%E2%80%94%20credentials">A short email is all it takes.</a>
+          </p>
+          <div class="notice" style="margin-top: 1.2rem;">
+            <strong>Design preview:</strong> to test, sign in with username <strong>egon</strong> and password <strong>demo2026</strong>. When the site goes live, this area will be protected server-side and each participant will receive individual credentials.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Member content (after login) ===== -->
+    <section class="section" id="member-area" hidden>
+      <div class="container">
+        <div class="section-head member-head">
+          <div>
+            <p class="section-kicker">Welcome back</p>
+            <h1 class="section-title">Your members area</h1>
+          </div>
+          <button class="btn btn-ghost btn-small" id="logout-btn">Sign out</button>
+        </div>
+
+        <h2 style="font-size: 1.4rem; margin-bottom: 0.4rem;">Recordings</h2>
+        <p style="color: var(--muted); margin-bottom: 1.2rem;">All webinars and online workshops you have taken part in remain permanently available here — as often as you like. <a href="videos.html#webinare">Upcoming live sessions</a> are still booked individually.</p>
+        <div class="video-grid">
+          <div>
+            <button class="video-embed" aria-label="Play recording">
+              <span class="video-play"></span>
+              <span class="video-embed-title">[PLACEHOLDER: webinar recording 1]</span>
+            </button>
+            <p class="video-caption">[PLACEHOLDER: topic and date of the webinar]</p>
+          </div>
+          <div>
+            <button class="video-embed" aria-label="Play recording">
+              <span class="video-play"></span>
+              <span class="video-embed-title">[PLACEHOLDER: webinar recording 2]</span>
+            </button>
+            <p class="video-caption">[PLACEHOLDER: topic and date of the webinar]</p>
+          </div>
+          <div>
+            <button class="video-embed" aria-label="Play recording">
+              <span class="video-play"></span>
+              <span class="video-embed-title">[PLACEHOLDER: online workshop recording]</span>
+            </button>
+            <p class="video-caption">[PLACEHOLDER: topic and date of the workshop]</p>
+          </div>
+        </div>
+
+        <h2 style="font-size: 1.4rem; margin: 2.5rem 0 0.6rem;">Material library</h2>
+        <p style="color: var(--muted); margin-bottom: 1.2rem;">Exercises for home, nutrition advice, recipes and herbal blends — sorted by topic. Choose whatever is on your mind right now.</p>
+
+        <div class="filter-bar" id="material-filter">
+          <button type="button" class="filter-chip" data-thema="alle" aria-pressed="true">All</button>
+          <button type="button" class="filter-chip" data-thema="ruecken" aria-pressed="false">Back &amp; joints</button>
+          <button type="button" class="filter-chip" data-thema="schlaf" aria-pressed="false">Sleep &amp; stress</button>
+          <button type="button" class="filter-chip" data-thema="allergien" aria-pressed="false">Allergies &amp; immunity</button>
+          <button type="button" class="filter-chip" data-thema="haut" aria-pressed="false">Skin</button>
+          <button type="button" class="filter-chip" data-thema="verdauung" aria-pressed="false">Gut &amp; digestion</button>
+          <button type="button" class="filter-chip" data-thema="ernaehrung" aria-pressed="false">Nutrition &amp; recipes</button>
+          <button type="button" class="filter-chip" data-thema="kraeuter" aria-pressed="false">Herbs &amp; home remedies</button>
+        </div>
+
+        <div class="cards" id="material-liste" style="grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));">
+
+          <article class="card" data-thema="ruecken">
+            <span class="material-typ">Exercise</span>
+            <h3>Back exercises for everyday life</h3>
+            <p>[PLACEHOLDER: short programme against tension in the lower back — also doable at the office.]</p>
+            <p class="material-quelle">PDF · accompanying chiropractic and Bowen therapy</p>
+          </article>
+
+          <article class="card" data-thema="ruecken">
+            <span class="material-typ">Exercise</span>
+            <h3>Release your neck in 5 minutes</h3>
+            <p>[PLACEHOLDER: exercise sequence for neck and shoulders during screen work.]</p>
+            <p class="material-quelle">PDF · from the webinar "Understanding back pain"</p>
+          </article>
+
+          <article class="card" data-thema="schlaf">
+            <span class="material-typ">Exercise</span>
+            <h3>Evening ritual for better sleep</h3>
+            <p>[PLACEHOLDER: step-by-step routine for winding down — screen time, breathing, light.]</p>
+            <p class="material-quelle">PDF · accompanying treatment for inner restlessness</p>
+          </article>
+
+          <article class="card" data-thema="schlaf">
+            <span class="material-typ">Exercise</span>
+            <h3>Breathing exercise for restlessness</h3>
+            <p>[PLACEHOLDER: guide to a calming breathing technique for acute moments of stress.]</p>
+            <p class="material-quelle">Video &amp; PDF · from the workshop</p>
+          </article>
+
+          <article class="card" data-thema="schlaf kraeuter">
+            <span class="material-typ kraut">Herbal blend</span>
+            <h3>Tea blend "Evening calm"</h3>
+            <p>[PLACEHOLDER: composition and preparation of the herbal blend for support in the evening.]</p>
+            <p class="material-quelle">Available at the practice · sources on request</p>
+          </article>
+
+          <article class="card" data-thema="allergien ernaehrung">
+            <span class="material-typ merkblatt">Info sheet</span>
+            <h3>Nutrition during pollen season</h3>
+            <p>[PLACEHOLDER: which foods can relieve the body during allergy season — and which cross-reactions are common.]</p>
+            <p class="material-quelle">PDF · accompanying autologous blood therapy</p>
+          </article>
+
+          <article class="card" data-thema="verdauung ernaehrung">
+            <span class="material-typ merkblatt">Info sheet</span>
+            <h3>Gut restoration: a four-week plan</h3>
+            <p>[PLACEHOLDER: accompanying plan for gut restoration with nutrition guidance and a weekly overview.]</p>
+            <p class="material-quelle">PDF · accompanying gut restoration</p>
+          </article>
+
+          <article class="card" data-thema="ernaehrung">
+            <span class="material-typ rezept">Recipes</span>
+            <h3>Alkaline cooking: 10 simple recipes</h3>
+            <p>[PLACEHOLDER: everyday recipes for an alkaline-rich diet — from breakfast to dinner.]</p>
+            <p class="material-quelle">PDF for printing</p>
+          </article>
+
+          <article class="card" data-thema="haut">
+            <span class="material-typ merkblatt">Info sheet</span>
+            <h3>Supporting your skin from within</h3>
+            <p>[PLACEHOLDER: what to consider day to day with neurodermatitis and dry skin — nutrition, care, textiles.]</p>
+            <p class="material-quelle">PDF · accompanying skin therapy</p>
+          </article>
+
+          <article class="card" data-thema="kraeuter allergien">
+            <span class="material-typ kraut">Home remedy</span>
+            <h3>Using compresses correctly</h3>
+            <p>[PLACEHOLDER: classic naturopathic home remedies — application, duration, what to watch out for.]</p>
+            <p class="material-quelle">PDF · traditional applications</p>
+          </article>
+
+        </div>
+        <p class="leer-hinweis" id="material-leer" hidden>There are currently no materials filed under this topic.</p>
+
+        <div class="notice" style="margin-top: 1.5rem;">
+          All materials are supplementary recommendations accompanying your treatment. They replace neither individual advice at the practice nor a medical assessment. Please discuss herbal blends and supplements with me before taking them alongside prescribed medication.
+        </div>
+
+        <div class="notice" style="margin-top: 2.5rem;">
+          <strong>Next live session:</strong> [PLACEHOLDER: date, topic and access link of the next webinar or online workshop.]
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Naturopathic Practice Egon Philipp</h4>
+        <p>Wettersteinstr. 4<br>82024 Taufkirchen, Germany</p>
+        <p style="margin-top: 0.7rem;">
+          Phone: <a href="tel:+491743175120">+49 174 317 5120</a><br>
+          Email: <a href="mailto:info@naturheilpraxis-philipp.de">info@naturheilpraxis-philipp.de</a>
+        </p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="leistungen.html">Treatments</a></li>
+          <li><a href="kinder.html">Children</a></li>
+          <li><a href="zu-meiner-person.html">About me</a></li>
+          <li><a href="gesundheitstests.html">Self-tests</a></li>
+          <li><a href="anamnese.html">Medical history form</a></li>
+        <li><a href="videos.html">Webinars</a></li>
+          <li><a href="mitglieder.html">Members area</a></li>
+          <li><a href="kontakt.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="impressum.html">Legal notice</a></li>
+          <li><a href="datenschutz.html">Privacy policy</a></li>
+          <li><a href="../mitglieder.html">Deutsche Version</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <div class="container">
+        <p>Note: The naturopathic methods presented here are based on empirical healing traditions. Some of them are not scientifically recognised, and they do not replace a visit to a medical doctor. The content of the members area serves general information purposes and does not replace individual diagnosis or treatment.</p>
+        <p>© <span id="year"></span> Naturheilpraxis Egon Philipp</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js?v=2"></script>
+  <script>
+  // Demo login of the design preview. IMPORTANT: replace with server-side
+  // protection before going live (e.g. basic auth or a membership system) —
+  // a pure JavaScript login does NOT really protect content.
+  (function () {
+    var root = (document.currentScript && document.currentScript.closest('.page')) || document;
+    var form = root.querySelector('#login-form');
+    var loginSection = root.querySelector('#login');
+    var memberArea = root.querySelector('#member-area');
+    var error = root.querySelector('#login-error');
+
+    var store = {
+      get: function () { try { return sessionStorage.getItem('egon-mitglied'); } catch (e) { return window.__m; } },
+      set: function (v) { try { sessionStorage.setItem('egon-mitglied', v); } catch (e) { window.__m = v; } },
+      clear: function () { try { sessionStorage.removeItem('egon-mitglied'); } catch (e) { window.__m = null; } }
+    };
+
+    function show(loggedIn) {
+      loginSection.hidden = loggedIn;
+      memberArea.hidden = !loggedIn;
+    }
+
+    show(store.get() === '1');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var u = root.querySelector('#login-user').value.trim().toLowerCase();
+      var p = root.querySelector('#login-pass').value;
+      if (u === 'egon' && p === 'demo2026') {
+        store.set('1');
+        error.classList.remove('show');
+        show(true);
+        window.scrollTo({ top: 0 });
+      } else {
+        error.classList.add('show');
+      }
+    });
+
+    root.querySelector('#logout-btn').addEventListener('click', function () {
+      store.clear();
+      show(false);
+    });
+
+    // Material library: filter by topic
+    var filter = root.querySelector('#material-filter');
+    if (filter) {
+      var karten = Array.prototype.slice.call(root.querySelectorAll('#material-liste .card'));
+      var leer = root.querySelector('#material-leer');
+      filter.addEventListener('click', function (e) {
+        var chip = e.target.closest('.filter-chip');
+        if (!chip) return;
+        var thema = chip.dataset.thema;
+        filter.querySelectorAll('.filter-chip').forEach(function (c) {
+          c.setAttribute('aria-pressed', String(c === chip));
+        });
+        var sichtbar = 0;
+        karten.forEach(function (k) {
+          var passt = thema === 'alle' || (' ' + k.dataset.thema + ' ').indexOf(' ' + thema + ' ') !== -1;
+          k.hidden = !passt;
+          if (passt) sichtbar++;
+        });
+        leer.hidden = sichtbar > 0;
+      });
+    }
+  })();
+  </script>
+</body>
+</html>
