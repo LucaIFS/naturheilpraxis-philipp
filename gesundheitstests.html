@@ -273,7 +273,7 @@
         var zeilen = t.fragen.map(function (f, i) {
           return '- ' + f + ' → ' + antworten[state.verlauf[i]].label;
         });
-        var mailBody = 'Guten Tag Herr Philipp,\n\nich habe auf Ihrer Website den Selbsttest „' + t.titel + '" gemacht.\n\nErgebnis: ' + erg.label + ' (' + summe + ' von 16 Punkten)\n\nMeine Antworten:\n' + zeilen.join('\n') + '\n\nIch würde gerne einen Termin vereinbaren.\nWunschtermin 1:\nWunschtermin 2:\n\nMit freundlichen Grüßen';
+        var mailBody = 'Guten Tag Herr Philipp,\n\nich habe auf Ihrer Website den Selbsttest „' + t.titel + '“ gemacht.\n\nErgebnis: ' + erg.label + ' (' + summe + ' von 16 Punkten)\n\nMeine Antworten:\n' + zeilen.join('\n') + '\n\nIch würde gerne einen Termin vereinbaren.\nWunschtermin 1:\nWunschtermin 2:\n\nMit freundlichen Grüßen';
         var mailHref = 'mailto:info@naturheilpraxis-philipp.de?subject=' + encodeURIComponent('Selbsttest-Ergebnis: ' + t.titel) + '&body=' + encodeURIComponent(mailBody);
         quiz.innerHTML =
           '<div class="quiz-result">' +
@@ -286,7 +286,7 @@
           '<a href="' + mailHref + '" class="btn btn-ghost">Ergebnis an die Praxis senden</a>' +
           '<button type="button" class="btn btn-ghost quiz-print">Drucken / als PDF speichern</button>' +
           '</div>' +
-          '<p style="margin-top:0.8rem;color:var(--muted);font-size:0.85rem;">Der Versand öffnet Ihr eigenes E-Mail-Programm — gesendet wird erst, wenn Sie dort auf „Senden" klicken. So liegt Ihr Ergebnis schon vor dem ersten Gespräch in der Praxis vor.</p>' +
+          '<p style="margin-top:0.8rem;color:var(--muted);font-size:0.85rem;">Der Versand öffnet Ihr eigenes E-Mail-Programm — gesendet wird erst, wenn Sie dort auf „Senden“ klicken. So liegt Ihr Ergebnis schon vor dem ersten Gespräch in der Praxis vor.</p>' +
           '<button type="button" class="quiz-back">← Zurück zur Testauswahl</button>' +
           '</div>';
         quiz.querySelector('.quiz-print').addEventListener('click', function () { window.print(); });
