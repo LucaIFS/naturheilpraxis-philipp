@@ -55,15 +55,16 @@ if (buehne && window.WebGLRenderingContext) {
       leber:     new THREE.MeshStandardMaterial({ color: 0xa05f3e, roughness: 0.55, emissive: 0x33180c, emissiveIntensity: 0.35 }),
       duenndarm: new THREE.MeshStandardMaterial({ color: 0xd9a969, roughness: 0.6, emissive: 0x3c2a12, emissiveIntensity: 0.3 }),
       dickdarm:  new THREE.MeshStandardMaterial({ color: 0xc98e50, roughness: 0.6, emissive: 0x36220e, emissiveIntensity: 0.3 }),
+      arterien:  new THREE.MeshStandardMaterial({ color: 0xb03a2e, roughness: 0.45, emissive: 0x4a0f0a, emissiveIntensity: 0.45 }),
     };
 
     // Organ -> Themenzone (Klick direkt aufs Organ öffnet die Karte daneben)
     const organZone = {
       gehirn: 'konzentration', lunge: 'allergien', herz: 'erschoepfung',
-      duenndarm: 'ozon', dickdarm: 'ozon', leber: 'ozon', haut: 'haut',
+      duenndarm: 'ozon', dickdarm: 'ozon', leber: 'ozon', haut: 'haut', arterien: 'ozon',
     };
 
-    new GLTFLoader().load(basis + 'koerper.glb?v=1', (gltf) => {
+    new GLTFLoader().load(basis + 'koerper.glb?v=2', (gltf) => {
       const meshes = {};
       gltf.scene.traverse((kind) => {
         if (!kind.isMesh) return;
@@ -81,6 +82,13 @@ if (buehne && window.WebGLRenderingContext) {
         return b.getCenter(new THREE.Vector3());
       };
 
+      // Herz um seinen eigenen Mittelpunkt zentrieren, damit der Puls-Effekt sauber skaliert
+      if (meshes.herz) {
+        const hz = mitte(meshes.herz);
+        meshes.herz.geometry.translate(-hz.x, -hz.y, -hz.z);
+        meshes.herz.position.copy(hz);
+      }
+
       // Anatomische Anker (Ziel der Verbindungslinien) — drehen mit dem Körper mit
       const anker = {};
       if (meshes.gehirn) anker.konzentration = mitte(meshes.gehirn).add(new THREE.Vector3(0, 0.03, 0.02));
@@ -91,6 +99,28 @@ if (buehne && window.WebGLRenderingContext) {
       if (meshes.duenndarm) anker.ozon = mitte(meshes.duenndarm).add(new THREE.Vector3(0, 0, 0.08));
       anker.cholincitrat = new THREE.Vector3(0.30, -0.05, 0.04);
       anker.krampfadern = new THREE.Vector3(0.12, -0.56, 0.06);
+
+      // Blutfluss: Partikel wandern entlang der Hauptschlagadern, Tempo pulsiert mit dem Herzschlag
+      const herzP = meshes.herz ? meshes.herz.position.clone() : new THREE.Vector3(0, 0.28, 0);
+      const kopfP = meshes.gehirn ? mitte(meshes.gehirn) : new THREE.Vector3(0, 0.82, 0);
+      const kurven = [
+        new THREE.CatmullRomCurve3([herzP.clone(), new THREE.Vector3(0.01, herzP.y + 0.16, 0.01), new THREE.Vector3(0.0, kopfP.y - 0.16, 0.02), kopfP.clone().add(new THREE.Vector3(0, -0.05, 0.01))]),
+        new THREE.CatmullRomCurve3([herzP.clone(), new THREE.Vector3(-0.10, herzP.y + 0.13, 0.0), new THREE.Vector3(-0.22, herzP.y + 0.10, 0.0), new THREE.Vector3(-0.29, herzP.y - 0.18, 0.02), new THREE.Vector3(-0.32, herzP.y - 0.42, 0.03)]),
+        new THREE.CatmullRomCurve3([herzP.clone(), new THREE.Vector3(0.10, herzP.y + 0.13, 0.0), new THREE.Vector3(0.22, herzP.y + 0.10, 0.0), new THREE.Vector3(0.29, herzP.y - 0.18, 0.02), new THREE.Vector3(0.32, herzP.y - 0.42, 0.03)]),
+        new THREE.CatmullRomCurve3([herzP.clone(), new THREE.Vector3(0.0, 0.02, -0.01), new THREE.Vector3(-0.05, -0.20, 0.0), new THREE.Vector3(-0.10, -0.42, 0.02), new THREE.Vector3(-0.12, -0.66, 0.03), new THREE.Vector3(-0.13, -0.90, 0.04)]),
+        new THREE.CatmullRomCurve3([herzP.clone(), new THREE.Vector3(0.0, 0.02, -0.01), new THREE.Vector3(0.05, -0.20, 0.0), new THREE.Vector3(0.10, -0.42, 0.02), new THREE.Vector3(0.12, -0.66, 0.03), new THREE.Vector3(0.13, -0.90, 0.04)]),
+      ];
+      const blut = [];
+      const blutGeo = new THREE.SphereGeometry(0.011, 8, 8);
+      const blutMat = new THREE.MeshBasicMaterial({ color: 0xff5747 });
+      kurven.forEach((kurve, ki) => {
+        for (let i = 0; i < 6; i++) {
+          const kugel = new THREE.Mesh(blutGeo, blutMat);
+          kugel.renderOrder = 1;
+          szene.add(kugel);
+          blut.push({ mesh: kugel, kurve: kurve, phase: i / 6 + ki * 0.137 });
+        }
+      });
 
       // Feste Punkte rund um den Körper (wie eine Uhr): links die Zonen der linken Karten, rechts die der rechten
       const uhr = [
@@ -231,8 +261,28 @@ if (buehne && window.WebGLRenderingContext) {
         });
       }
 
+      // Herzschlag (~68/min): kräftiger erster Ton, schwächerer zweiter — Blutfluss pulsiert mit
+      const uhrwerk = new THREE.Clock();
+      let flussPos = 0;
+      function herzWelle(p) {
+        const eins = Math.exp(-Math.pow((p - 0.10) / 0.045, 2));
+        const zwei = 0.5 * Math.exp(-Math.pow((p - 0.34) / 0.055, 2));
+        return eins + zwei;
+      }
       (function schleife() {
         requestAnimationFrame(schleife);
+        const dt = Math.min(uhrwerk.getDelta(), 0.1);
+        const phase = (uhrwerk.elapsedTime * 1.13) % 1;
+        const welle = herzWelle(phase);
+        if (meshes.herz) {
+          meshes.herz.scale.setScalar(1 + 0.09 * welle);
+          meshes.herz.material.emissiveIntensity = 0.4 + 0.55 * welle;
+        }
+        flussPos += dt * (0.05 + 0.17 * welle);
+        for (let i = 0; i < blut.length; i++) {
+          const b = blut[i];
+          b.mesh.position.copy(b.kurve.getPoint((b.phase + flussPos) % 1));
+        }
         steuerung.update();
         linienAktualisieren();
         renderer.render(szene, kamera);
