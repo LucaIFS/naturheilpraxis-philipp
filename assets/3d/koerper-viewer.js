@@ -81,7 +81,7 @@ if (buehne && window.WebGLRenderingContext) {
         return b.getCenter(new THREE.Vector3());
       };
 
-      // Punkt-Anker: aus Organ-Zentren bzw. von Hand gesetzt
+      // Anatomische Anker (Ziel der Verbindungslinien) — drehen mit dem Körper mit
       const anker = {};
       if (meshes.gehirn) anker.konzentration = mitte(meshes.gehirn).add(new THREE.Vector3(0, 0.03, 0.02));
       if (meshes.gehirn) anker.haut = mitte(meshes.gehirn).add(new THREE.Vector3(0.05, -0.13, 0.10));
@@ -92,66 +92,84 @@ if (buehne && window.WebGLRenderingContext) {
       anker.cholincitrat = new THREE.Vector3(0.30, -0.05, 0.04);
       anker.krampfadern = new THREE.Vector3(0.12, -0.56, 0.06);
 
+      // Feste Punkte rund um den Körper (wie eine Uhr): links die Zonen der linken Karten, rechts die der rechten
+      const uhr = [
+        { zone: 'konzentration', seite: 'links',  top: 10 },
+        { zone: 'allergien',     seite: 'links',  top: 34 },
+        { zone: 'ozon',          seite: 'links',  top: 58 },
+        { zone: 'krampfadern',   seite: 'links',  top: 82 },
+        { zone: 'haut',          seite: 'rechts', top: 10 },
+        { zone: 'ruecken',       seite: 'rechts', top: 34 },
+        { zone: 'erschoepfung',  seite: 'rechts', top: 58 },
+        { zone: 'cholincitrat',  seite: 'rechts', top: 82 },
+      ];
 
-      // Punkt-Textur (grüner Punkt mit weißem Ring) einmal zeichnen
-      function punktTextur(farbe) {
-        const c = document.createElement('canvas');
-        c.width = c.height = 64;
-        const g = c.getContext('2d');
-        g.beginPath(); g.arc(32, 32, 26, 0, Math.PI * 2); g.fillStyle = '#ffffff'; g.fill();
-        g.beginPath(); g.arc(32, 32, 19, 0, Math.PI * 2); g.fillStyle = farbe; g.fill();
-        const t = new THREE.CanvasTexture(c);
-        t.colorSpace = THREE.SRGBColorSpace;
-        return t;
-      }
-      const texGruen = punktTextur('#2f7d4f');
-      const texGold = punktTextur('#c9a24b');
+      // SVG-Fallback gegen Canvas + Overlay tauschen — frischer Klon entfernt die alten Drag-Listener der 2D-Bühne
+      const halter = buehne.cloneNode(false);
+      buehne.replaceWith(halter);
+      halter.style.position = 'relative';
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      halter.appendChild(renderer.domElement);
 
-      const sprites = {};
-      Object.keys(anker).forEach((schluessel) => {
-        const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: texGruen, depthTest: false }));
-        s.position.copy(anker[schluessel]);
-        s.scale.setScalar(0.075);
-        s.renderOrder = 3;
-        s.userData.zone = schluessel;
-        szene.add(s);
-        sprites[schluessel] = s;
+      // Overlay für Verbindungslinien
+      const svgNS = 'http://www.w3.org/2000/svg';
+      const overlay = document.createElementNS(svgNS, 'svg');
+      overlay.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; pointer-events:none;';
+      halter.appendChild(overlay);
+      const linien = {}, ankerPunkte = {};
+      uhr.forEach((u) => {
+        const l = document.createElementNS(svgNS, 'line');
+        l.setAttribute('stroke', '#2f7d4f'); l.setAttribute('stroke-width', '1.5'); l.setAttribute('opacity', '0.5');
+        overlay.appendChild(l); linien[u.zone] = l;
+        const c = document.createElementNS(svgNS, 'circle');
+        c.setAttribute('r', '4'); c.setAttribute('fill', '#2f7d4f'); c.setAttribute('stroke', '#fff'); c.setAttribute('stroke-width', '1.5');
+        overlay.appendChild(c); ankerPunkte[u.zone] = c;
       });
 
-      // Aktive Zone golden markieren (persistent), Hover nur temporär
+      // Feste Uhr-Punkte als HTML-Buttons (stehen still -> Hover bleibt stabil)
+      const punkte = {};
+      uhr.forEach((u) => {
+        const b = document.createElement('button');
+        b.className = 'kb-punkt';
+        b.style.left = (u.seite === 'links' ? '3%' : '97%');
+        b.style.top = u.top + '%';
+        b.style.transform = 'translate(-50%,-50%)';
+        b.setAttribute('data-zone-punkt', u.zone);
+        const karte = document.querySelector('.kb-karte[data-zone="' + u.zone + '"] h3');
+        if (karte) { b.title = karte.textContent; b.setAttribute('aria-label', karte.textContent); }
+        halter.appendChild(b);
+        punkte[u.zone] = b;
+        b.addEventListener('mouseenter', () => { oeffnen(u.zone, false); });
+        b.addEventListener('click', (e) => { e.stopPropagation(); oeffnen(u.zone, true); });
+      });
+
       let aktiveZone = null;
-      function darstellen(schluessel, aktiv) {
-        const s = sprites[schluessel];
-        if (!s) return;
-        s.material.map = aktiv ? texGold : texGruen;
-        s.scale.setScalar(aktiv ? 0.10 : 0.075);
-      }
       function markiere(zone) {
         aktiveZone = zone;
-        Object.keys(sprites).forEach((k) => darstellen(k, k === zone));
+        Object.keys(punkte).forEach((k) => punkte[k].classList.toggle('kb-aktiv', k === zone));
+      }
+      function oeffnen(zone, scrollen) {
+        if (window.kbZeigeThema) window.kbZeigeThema(zone, true, scrollen);
+        markiere(zone);
       }
       document.addEventListener('kb-thema', (ev) => markiere(ev.detail));
 
-      // Karte <-> Punkt Hover-Kopplung (Karten haben data-zone)
+      // Karte <-> Punkt Hover-Kopplung
       document.querySelectorAll('.kb-karte[data-zone]').forEach((karte) => {
         const zone = karte.getAttribute('data-zone');
-        if (!sprites[zone]) return;
-        karte.addEventListener('mouseenter', () => darstellen(zone, true));
-        karte.addEventListener('mouseleave', () => darstellen(zone, zone === aktiveZone));
+        if (!punkte[zone]) return;
+        karte.addEventListener('mouseenter', () => punkte[zone].classList.add('kb-aktiv'));
+        karte.addEventListener('mouseleave', () => punkte[zone].classList.toggle('kb-aktiv', zone === aktiveZone));
       });
 
-      // SVG-Fallback gegen Canvas tauschen — frischer Klon entfernt die alten Drag-Listener der 2D-Bühne
-      const halter = buehne.cloneNode(false);
-      buehne.replaceWith(halter);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       const groesse = () => {
         const w = halter.clientWidth;
         const h = Math.round(w * 1.5);
         renderer.setSize(w, h);
+        halter.style.height = h + 'px';
         kamera.aspect = w / h;
         kamera.updateProjectionMatrix();
       };
-      halter.appendChild(renderer.domElement);
       groesse();
       window.addEventListener('resize', groesse);
 
@@ -164,70 +182,59 @@ if (buehne && window.WebGLRenderingContext) {
       steuerung.maxPolarAngle = Math.PI * 0.62;
       steuerung.target.set(0, 0, 0);
 
-      // Klick/Hover per Raycast: erst Punkte, dann Organe, dann Haut
+      // Organ-Klick per Raycast (Punkte sind jetzt HTML und brauchen keinen Raycast)
       const strahl = new THREE.Raycaster();
       const zeiger = new THREE.Vector2();
       let bewegt = false, startX = 0, startY = 0;
-
-      function trefferSuchen(ev) {
+      function organTreffen(ev) {
         const r = renderer.domElement.getBoundingClientRect();
         zeiger.x = ((ev.clientX - r.left) / r.width) * 2 - 1;
         zeiger.y = -((ev.clientY - r.top) / r.height) * 2 + 1;
         strahl.setFromCamera(zeiger, kamera);
-        const spriteTreffer = strahl.intersectObjects(Object.values(sprites), false);
-        if (spriteTreffer.length) return spriteTreffer[0].object;
-        const meshTreffer = strahl.intersectObjects(Object.values(meshes), false);
-        const echt = meshTreffer.find((t) => t.object.name.toLowerCase() !== 'haut');
+        const treffer = strahl.intersectObjects(Object.values(meshes), false);
+        const echt = treffer.find((t) => t.object.name.toLowerCase() !== 'haut');
         if (echt) return echt.object;
-        if (meshTreffer.length) return meshTreffer[0].object;
-        return null;
+        return treffer.length ? treffer[0].object : null;
       }
-
       renderer.domElement.addEventListener('pointerdown', (ev) => { bewegt = false; startX = ev.clientX; startY = ev.clientY; });
-
-      // Hover auf einen grünen Punkt: Karte aufblenden; beim Verlassen (mit kurzer Gnadenfrist) wieder schließen
-      let hoverZone = null, hoverTimer = null;
-      function hoverSchliessen() {
-        const alte = hoverZone;
-        hoverZone = null;
-        if (hoverTimer) clearTimeout(hoverTimer);
-        hoverTimer = setTimeout(() => {
-          if (!hoverZone && alte && window.kbZeigeThema) {
-            window.kbZeigeThema(alte, false);
-            markiere(null);
-          }
-        }, 350);
-      }
       renderer.domElement.addEventListener('pointermove', (ev) => {
         if (Math.abs(ev.clientX - startX) + Math.abs(ev.clientY - startY) > 7) bewegt = true;
-        const ziel = trefferSuchen(ev);
+        const ziel = organTreffen(ev);
         renderer.domElement.style.cursor = (ziel && ziel.userData.zone) ? 'pointer' : 'grab';
-        const zone = (ziel && ziel.isSprite) ? ziel.userData.zone : null;
-        if (zone === hoverZone) return;
-        if (zone) {
-          if (hoverTimer) { clearTimeout(hoverTimer); hoverTimer = null; }
-          hoverZone = zone;
-          if (window.kbZeigeThema) window.kbZeigeThema(zone, true, false);
-          markiere(zone);
-        } else if (hoverZone) {
-          hoverSchliessen();
-        }
       });
-      renderer.domElement.addEventListener('pointerleave', () => { if (hoverZone) hoverSchliessen(); });
-
       renderer.domElement.addEventListener('click', (ev) => {
         if (bewegt) return;
-        const ziel = trefferSuchen(ev);
-        if (ziel && ziel.userData.zone && window.kbZeigeThema) {
-          if (hoverTimer) { clearTimeout(hoverTimer); hoverTimer = null; }
-          hoverZone = ziel.isSprite ? ziel.userData.zone : hoverZone;
-          window.kbZeigeThema(ziel.userData.zone, true);
-        }
+        const ziel = organTreffen(ev);
+        if (ziel && ziel.userData.zone) oeffnen(ziel.userData.zone, true);
       });
+
+      // Linien pro Frame nachführen: fester Uhr-Punkt -> projizierter Körper-Anker
+      const proj = new THREE.Vector3();
+      function linienAktualisieren() {
+        const w = halter.clientWidth, h = halter.clientHeight;
+        uhr.forEach((u) => {
+          const a = anker[u.zone];
+          if (!a) return;
+          proj.copy(a).project(kamera);
+          const x2 = (proj.x * 0.5 + 0.5) * w;
+          const y2 = (-proj.y * 0.5 + 0.5) * h;
+          const p = punkte[u.zone];
+          const x1 = (u.seite === 'links' ? 0.03 : 0.97) * w;
+          const y1 = (u.top / 100) * h;
+          const l = linien[u.zone], c = ankerPunkte[u.zone];
+          l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+          l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+          c.setAttribute('cx', x2); c.setAttribute('cy', y2);
+          const hinten = proj.z > 1;
+          l.setAttribute('opacity', hinten ? '0' : '0.5');
+          c.setAttribute('opacity', hinten ? '0' : '1');
+        });
+      }
 
       (function schleife() {
         requestAnimationFrame(schleife);
         steuerung.update();
+        linienAktualisieren();
         renderer.render(szene, kamera);
       })();
 
