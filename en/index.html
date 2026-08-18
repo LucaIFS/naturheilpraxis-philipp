@@ -103,210 +103,270 @@
       </div>
     </section>
 
-    <!-- ===== Interactive body navigator ===== -->
-    <section class="section section-alt" id="koerper-navigator">
+    <!-- ===== Areas of treatment: interactive body ===== -->
+    <section class="section section-alt" id="schwerpunkte">
       <style>
-        .kn-buehne{ perspective:950px; width:min(290px, 72vw); margin:2.2rem auto 0.6rem; }
-        .kn-3d{ position:relative; transform-style:preserve-3d; animation:kn-dreh 9s ease-in-out infinite alternate; }
-        .kn-buehne:hover .kn-3d, .kn-buehne:focus-within .kn-3d{ animation-play-state:paused; }
-        @keyframes kn-dreh{ from{ transform:rotateY(-26deg) rotateX(4deg);} to{ transform:rotateY(26deg) rotateX(4deg);} }
-        @media (prefers-reduced-motion: reduce){ .kn-3d{ animation:none; } }
-        .kn-3d > svg{ width:100%; height:auto; display:block; filter:drop-shadow(0 18px 22px rgba(20,46,33,0.22)); }
-        .kn-punkt{ position:absolute; width:21px; height:21px; border-radius:50%; background:var(--gold, #c9a24b); border:2.5px solid #fff; box-shadow:0 0 0 0 rgba(201,162,75,0.55); transform:translate(-50%,-50%) translateZ(26px); cursor:pointer; padding:0; animation:kn-puls 2.4s infinite; }
-        .kn-punkt:hover, .kn-punkt:focus-visible{ background:var(--green-600, #2f7d4f); animation:none; box-shadow:0 0 0 6px rgba(47,125,79,0.25); }
-        @keyframes kn-puls{ 0%{ box-shadow:0 0 0 0 rgba(201,162,75,0.55);} 70%{ box-shadow:0 0 0 11px rgba(201,162,75,0);} 100%{ box-shadow:0 0 0 0 rgba(201,162,75,0);} }
-        .kn-kind{ position:absolute; right:-24%; bottom:0; width:34%; transform:translateZ(-30px); opacity:0.85; }
-        .kn-kind svg{ width:100%; height:auto; display:block; filter:drop-shadow(0 12px 14px rgba(20,46,33,0.18)); }
-        .kn-kind:hover, .kn-kind:focus-visible{ opacity:1; }
-        .kn-boden{ width:min(200px,50vw); height:16px; margin:0 auto; border-radius:50%; background:radial-gradient(closest-side, rgba(20,46,33,0.18), rgba(20,46,33,0)); }
-        .kn-legende{ display:flex; flex-wrap:wrap; gap:0.55rem; justify-content:center; margin-top:1.6rem; }
-        .kn-chip{ border:1px solid var(--green-600, #2f7d4f); color:var(--green-800, #1e4d33); background:transparent; border-radius:999px; padding:0.38rem 0.9rem; font-size:0.88rem; cursor:pointer; text-decoration:none; display:inline-block; }
-        .kn-chip:hover, .kn-chip:focus-visible{ background:var(--green-800, #1e4d33); color:#fff; }
+        .kb-layout{ display:grid; grid-template-columns:1fr; gap:1.3rem; align-items:center; margin-top:1.5rem; }
+        @media (min-width: 980px){ .kb-layout{ grid-template-columns:1fr minmax(250px, 330px) 1fr; gap:1.6rem; } }
+        .kb-mitte{ order:-1; }
+        @media (min-width: 980px){ .kb-mitte{ order:0; } }
+        .kb-spalte{ display:grid; gap:1rem; align-content:center; }
+        .kb-karte{ background:#fff; border-radius:14px; padding:1.05rem 1.2rem; box-shadow:0 2px 10px rgba(20,46,33,0.07); border:1px solid rgba(20,46,33,0.06); transition:transform 0.18s ease, box-shadow 0.18s ease; }
+        .kb-karte:hover{ transform:translateY(-2px); box-shadow:0 6px 18px rgba(20,46,33,0.12); }
+        .kb-karte h3{ font-family:Georgia, 'Times New Roman', serif; font-size:1.02rem; color:var(--green-950, #142e21); margin:0 0 0.35rem; }
+        .kb-karte p{ font-size:0.87rem; color:var(--muted, #5c5c5c); margin:0 0 0.6rem; line-height:1.45; }
+        .kb-mehr{ background:none; border:none; padding:0; color:var(--green-600, #2f7d4f); font-weight:600; font-size:0.87rem; cursor:pointer; }
+        .kb-mehr:hover, .kb-mehr:focus-visible{ text-decoration:underline; }
+        .kb-buehne{ perspective:1000px; width:min(300px, 74vw); margin:0 auto; cursor:grab; touch-action:pan-y; user-select:none; -webkit-user-select:none; }
+        .kb-buehne:active{ cursor:grabbing; }
+        .kb-3d{ position:relative; transform-style:preserve-3d; animation:kb-dreh 10s ease-in-out infinite alternate; }
+        .kb-3d.kb-manuell{ animation:none; }
+        @keyframes kb-dreh{ from{ transform:rotateY(-24deg) rotateX(4deg);} to{ transform:rotateY(24deg) rotateX(4deg);} }
+        @media (prefers-reduced-motion: reduce){ .kb-3d{ animation:none; } }
+        .kb-3d > svg{ width:100%; height:auto; display:block; filter:drop-shadow(0 16px 20px rgba(20,46,33,0.20)); pointer-events:none; }
+        .kb-punkt{ position:absolute; width:22px; height:22px; border-radius:50%; background:var(--green-600, #2f7d4f); border:3px solid #fff; box-shadow:0 0 0 0 rgba(47,125,79,0.5); transform:translate(-50%,-50%) translateZ(28px); cursor:pointer; padding:0; animation:kb-puls 2.6s infinite; }
+        .kb-punkt:hover, .kb-punkt:focus-visible, .kb-punkt.kb-aktiv{ background:var(--gold, #c9a24b); animation:none; box-shadow:0 0 0 7px rgba(201,162,75,0.28); }
+        @keyframes kb-puls{ 0%{ box-shadow:0 0 0 0 rgba(47,125,79,0.5);} 70%{ box-shadow:0 0 0 10px rgba(47,125,79,0);} 100%{ box-shadow:0 0 0 0 rgba(47,125,79,0);} }
+        .kb-boden{ width:min(190px, 46vw); height:15px; margin:0.2rem auto 0; border-radius:50%; background:radial-gradient(closest-side, rgba(20,46,33,0.16), rgba(20,46,33,0)); }
+        .kb-hinweis{ text-align:center; color:var(--muted, #5c5c5c); font-size:0.82rem; margin-top:0.5rem; }
+        .kb-dialog{ border:none; border-radius:16px; padding:1.7rem 1.9rem; max-width:580px; width:min(92vw, 580px); box-shadow:0 20px 60px rgba(20,46,33,0.35); }
+        .kb-dialog::backdrop{ background:rgba(20,46,33,0.5); }
+        .kb-dialog h3{ font-family:Georgia, 'Times New Roman', serif; color:var(--green-950, #142e21); font-size:1.35rem; margin:0 0 0.8rem; padding-right:2rem; }
+        .kb-dialog h4{ color:var(--green-800, #1e4d33); margin:1rem 0 0.4rem; font-size:1rem; }
+        .kb-dialog p, .kb-dialog li{ line-height:1.55; color:var(--ink, #2c2c2c); }
+        .kb-dialog ul{ padding-left:1.2rem; margin:0.4rem 0; }
+        .kb-schliessen{ position:absolute; top:0.8rem; right:0.9rem; background:none; border:none; font-size:1.6rem; line-height:1; color:var(--muted, #5c5c5c); cursor:pointer; padding:0.2rem; }
+        .kb-schliessen:hover{ color:var(--green-950, #142e21); }
       </style>
       <div class="container">
         <div class="section-head">
-          <p class="section-kicker">Interactive</p>
-          <h2 class="section-title">Where does it hurt?</h2>
-          <p class="section-intro">Simply tap the affected part of the body — you will jump straight to the matching area of treatment. The small figure leads to the children's section.</p>
+          <p class="section-kicker">How I can help</p>
+          <h2 class="section-title">Our body. Seen as a whole.</h2>
+          <p class="section-intro">Individual treatment for better health and quality of life. Rotate the body with your mouse or finger — and choose an area to learn more.</p>
         </div>
-        <div class="kn-buehne">
-          <div class="kn-3d">
-            <svg viewBox="0 0 200 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <g fill="none" stroke="#1e4d33" stroke-linecap="round">
-                <circle cx="100" cy="40" r="26" fill="#1e4d33" stroke="none"/>
-                <path d="M100 58 L100 84" stroke-width="18"/>
-                <path d="M100 106 L100 208" stroke-width="58"/>
-                <path d="M100 200 L100 230" stroke-width="56"/>
-                <path d="M66 102 L57 186" stroke-width="20"/>
-                <path d="M134 102 L143 186" stroke-width="20"/>
-                <path d="M85 236 L82 322 L80 388" stroke-width="26"/>
-                <path d="M115 236 L118 322 L120 388" stroke-width="26"/>
-              </g>
-            </svg>
-            <button class="kn-punkt" style="left:50%; top:5.5%;" data-ziel="karte-konzentration" title="Concentration &amp; ADD/ADHD" aria-label="Head: concentration and ADD/ADHD"></button>
-            <button class="kn-punkt" style="left:50%; top:11.5%;" data-ziel="karte-allergien" title="Allergies &amp; hay fever" aria-label="Face: allergies and hay fever"></button>
-            <button class="kn-punkt" style="left:64%; top:22%;" data-ziel="karte-ruecken" title="Back pain &amp; tension" aria-label="Shoulder and neck: back pain"></button>
-            <button class="kn-punkt" style="left:43%; top:28%;" data-ziel="karte-erschoepfung" title="Exhaustion &amp; burn-out" aria-label="Heart: exhaustion and burn-out"></button>
-            <button class="kn-punkt" style="left:69%; top:32%;" data-ziel="karte-haut" title="Skin conditions" aria-label="Arm: skin conditions"></button>
-            <button class="kn-punkt" style="left:30%; top:40%;" data-ziel="karte-cholincitrat" title="Choline citrate infusions" aria-label="Crook of the arm: choline citrate infusions"></button>
-            <button class="kn-punkt" style="left:52%; top:44%;" data-ziel="karte-ozon" title="Ozone therapy" aria-label="Abdomen: ozone therapy"></button>
-            <button class="kn-punkt" style="left:59%; top:78%;" data-ziel="karte-krampfadern" title="Varicose &amp; spider veins" aria-label="Leg: varicose and spider veins"></button>
-            <a class="kn-kind" href="kinder.html" title="To the children's section" aria-label="To the children's section">
-              <svg viewBox="0 0 200 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <g fill="none" stroke="#2f7d4f" stroke-linecap="round">
-                  <circle cx="100" cy="72" r="34" fill="#2f7d4f" stroke="none"/>
-                  <path d="M100 98 L100 122" stroke-width="18"/>
-                  <path d="M100 148 L100 240" stroke-width="54"/>
-                  <path d="M68 148 L58 218" stroke-width="19"/>
-                  <path d="M132 148 L142 218" stroke-width="19"/>
-                  <path d="M86 266 L83 388" stroke-width="25"/>
-                  <path d="M114 266 L117 388" stroke-width="25"/>
-                </g>
-              </svg>
-            </a>
+        <div class="kb-layout">
+          <div class="kb-spalte">
+            <article class="kb-karte" id="karte-konzentration" data-zone="konzentration">
+              <h3>Concentration &amp; ADD/ADHD</h3>
+              <p>Learning difficulties and attention deficits in children play an ever greater role in my practice.</p>
+              <button class="kb-mehr" data-dialog="dlg-konzentration">Learn more →</button>
+            </article>
+            <article class="kb-karte" id="karte-allergien" data-zone="allergien">
+              <h3>Allergies</h3>
+              <p>Up to 20 percent of Germans now suffer from an allergy — a misregulation of the immune system that naturopathy can help address.</p>
+              <button class="kb-mehr" data-dialog="dlg-allergien">Learn more →</button>
+            </article>
+            <article class="kb-karte" id="karte-ozon" data-zone="ozon">
+              <h3>Ozone therapy</h3>
+              <p>No life without oxygen: activated oxygen (O₃) as the most energy-rich form of oxygen for cell metabolism and vitality.</p>
+              <button class="kb-mehr" data-dialog="dlg-ozon">Learn more →</button>
+            </article>
+            <article class="kb-karte" id="karte-krampfadern" data-zone="krampfadern">
+              <h3>Varicose &amp; spider veins</h3>
+              <p>Biologically gentle varicose vein removal — trained by Dr. Bernhard Rieger, Bamberg.</p>
+              <button class="kb-mehr" data-dialog="dlg-krampfadern">Learn more →</button>
+            </article>
+          </div>
+          <div class="kb-mitte">
+            <div class="kb-buehne" id="kb-buehne">
+              <div class="kb-3d" id="kb-3d">
+                <svg viewBox="0 0 300 640" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <g stroke="none">
+                    <path d="M150 18 C171 18 184 36 184 58 C184 76 176 92 166 99 L166 112 L134 112 L134 99 C124 92 116 76 116 58 C116 36 129 18 150 18 Z" fill="#ecdcc9"/>
+                    <rect x="136" y="102" width="28" height="24" fill="#ecdcc9"/>
+                    <path d="M104 128 C118 118 182 118 196 128 C204 134 208 146 210 162 C214 196 210 228 204 258 C200 282 198 304 200 330 C200 346 190 356 150 356 C110 356 100 346 100 330 C102 304 100 282 96 258 C90 228 86 196 90 162 C92 146 96 134 104 128 Z" fill="#ecdcc9"/>
+                    <path d="M100 140 C86 158 80 186 78 216 C76 252 74 288 78 318" fill="none" stroke="#ecdcc9" stroke-width="23" stroke-linecap="round"/>
+                    <path d="M200 140 C214 158 220 186 222 216 C224 252 226 288 222 318" fill="none" stroke="#ecdcc9" stroke-width="23" stroke-linecap="round"/>
+                    <path d="M128 352 C126 400 124 470 126 520 C127 560 128 590 130 612" fill="none" stroke="#ecdcc9" stroke-width="38" stroke-linecap="round"/>
+                    <path d="M172 352 C174 400 176 470 174 520 C173 560 172 590 170 612" fill="none" stroke="#ecdcc9" stroke-width="38" stroke-linecap="round"/>
+                    <g opacity="0.8">
+                      <ellipse cx="150" cy="50" rx="22" ry="16" fill="#c9b183"/>
+                      <path d="M133 48 Q140 41 147 48 T161 48 T168 52" stroke="#a08752" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                      <path d="M150 122 L150 152" stroke="#8ea27b" stroke-width="5" fill="none" stroke-linecap="round"/>
+                      <path d="M138 162 C132 150 118 152 114 166 C108 186 110 210 118 222 C126 232 138 228 140 214 C142 196 142 176 138 162 Z" fill="#a9bd96"/>
+                      <path d="M162 162 C168 150 182 152 186 166 C192 186 190 210 182 222 C174 232 162 228 160 214 C158 196 158 176 162 162 Z" fill="#a9bd96"/>
+                      <path d="M148 178 c-6 -8 -17 -4 -17 6 c0 8 9 13 17 19 c8 -6 17 -11 17 -19 c0 -10 -11 -14 -17 -6 z" fill="#c98f7f"/>
+                      <path d="M158 234 C172 228 186 232 188 242 C188 250 174 254 162 250 Z" fill="#c1a176"/>
+                      <rect x="120" y="244" width="60" height="62" rx="27" fill="#d9c096"/>
+                      <path d="M126 258 h48 M126 272 h48 M126 286 h48 M128 298 h40" stroke="#b99f6e" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.75"/>
+                    </g>
+                  </g>
+                </svg>
+                <button class="kb-punkt" style="left:50%; top:8%;" data-zone-punkt="konzentration" data-dialog="dlg-konzentration" title="Concentration &amp; ADD/ADHD" aria-label="Head: concentration and ADD/ADHD"></button>
+                <button class="kb-punkt" style="left:59%; top:11%;" data-zone-punkt="haut" data-dialog="dlg-haut" title="Skin conditions" aria-label="Skin: skin conditions"></button>
+                <button class="kb-punkt" style="left:64%; top:21%;" data-zone-punkt="ruecken" data-dialog="dlg-ruecken" title="Back pain" aria-label="Back and shoulder: back pain"></button>
+                <button class="kb-punkt" style="left:41%; top:30%;" data-zone-punkt="allergien" data-dialog="dlg-allergien" title="Allergies" aria-label="Airways: allergies"></button>
+                <button class="kb-punkt" style="left:50%; top:29%;" data-zone-punkt="erschoepfung" data-dialog="dlg-erschoepfung" title="Exhaustion &amp; burn-out" aria-label="Heart: exhaustion and burn-out"></button>
+                <button class="kb-punkt" style="left:44%; top:43%;" data-zone-punkt="ozon" data-dialog="dlg-ozon" title="Ozone therapy" aria-label="Metabolism: ozone therapy"></button>
+                <button class="kb-punkt" style="left:74%; top:44%;" data-zone-punkt="cholincitrat" data-dialog="dlg-cholincitrat" title="Choline citrate infusions" aria-label="Arm vein: choline citrate infusions"></button>
+                <button class="kb-punkt" style="left:42%; top:83%;" data-zone-punkt="krampfadern" data-dialog="dlg-krampfadern" title="Varicose &amp; spider veins" aria-label="Leg: varicose and spider veins"></button>
+              </div>
+            </div>
+            <div class="kb-boden" aria-hidden="true"></div>
+            <p class="kb-hinweis">↔ Rotate the body with your mouse or finger · tap a dot for details</p>
+          </div>
+          <div class="kb-spalte">
+            <article class="kb-karte" id="karte-ruecken" data-zone="ruecken">
+              <h3>Back pain</h3>
+              <p>From lumbago to chronic tension: chiropractic, Baunscheidt therapy and Bowen therapy used in combination.</p>
+              <button class="kb-mehr" data-dialog="dlg-ruecken">Learn more →</button>
+            </article>
+            <article class="kb-karte" id="karte-haut" data-zone="haut">
+              <h3>Skin conditions</h3>
+              <p>Chronic skin problems such as neurodermatitis are on the rise — especially among children and teenagers. Holistic care instead of treating symptoms only.</p>
+              <button class="kb-mehr" data-dialog="dlg-haut">Learn more →</button>
+            </article>
+            <article class="kb-karte" id="karte-erschoepfung" data-zone="erschoepfung">
+              <h3>Exhaustion &amp; burn-out</h3>
+              <p>When work, family and everyday life drain your energy: regeneration and strengthening of your own resources.</p>
+              <button class="kb-mehr" data-dialog="dlg-erschoepfung">Learn more →</button>
+            </article>
+            <article class="kb-karte" id="karte-cholincitrat" data-zone="cholincitrat">
+              <h3>Choline citrate infusions</h3>
+              <p>Deep relaxation: choline citrate infusions can support the autonomic nervous system — for inner calm and balance.</p>
+              <button class="kb-mehr" data-dialog="dlg-cholincitrat">Learn more →</button>
+            </article>
           </div>
         </div>
-        <div class="kn-boden" aria-hidden="true"></div>
-        <div class="kn-legende">
-          <button class="kn-chip" data-ziel="karte-konzentration">Head · Concentration</button>
-          <button class="kn-chip" data-ziel="karte-allergien">Nose · Allergies</button>
-          <button class="kn-chip" data-ziel="karte-ruecken">Back</button>
-          <button class="kn-chip" data-ziel="karte-erschoepfung">Heart · Exhaustion</button>
-          <button class="kn-chip" data-ziel="karte-haut">Skin</button>
-          <button class="kn-chip" data-ziel="karte-cholincitrat">Vein · Choline citrate</button>
-          <button class="kn-chip" data-ziel="karte-ozon">Abdomen · Ozone</button>
-          <button class="kn-chip" data-ziel="karte-krampfadern">Legs · Varicose veins</button>
-          <a class="kn-chip" href="kinder.html">Children's section</a>
-        </div>
       </div>
+
+      <dialog class="kb-dialog" id="dlg-konzentration">
+        <button class="kb-schliessen" aria-label="Close">×</button>
+        <h3>Concentration &amp; ADD/ADHD</h3>
+        <p>Affected children often show excessive restlessness, difficulty concentrating, dyslexia or a low frustration threshold — a heavy burden for children, parents and teachers alike.</p>
+        <h4>Treatment</h4>
+        <p>The key principle is individual investigation of the causes: nutrition (e.g. sugar), mineral deficiencies, lack of exercise and family structures are considered alongside possible burdens on the organism. Treatment is then tailored homeopathically to the individual child.</p>
+        <p><a href="kinder.html">More in the children's section →</a></p>
+        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Book an appointment</a></p>
+      </dialog>
+      <dialog class="kb-dialog" id="dlg-allergien">
+        <button class="kb-schliessen" aria-label="Close">×</button>
+        <h3>Allergies</h3>
+        <p>In an allergy, the immune system reacts against substances that are actually harmless. From a naturopathic perspective, burdens on the connective tissue play a major role — heavy metals, environmental toxins, medication or intestinal imbalances build up in the body as waste does in a bin, until it overflows: that is when the illness breaks out.</p>
+        <h4>Treatment</h4>
+        <p>It starts with finding the cause. Long-term treatment focuses on detoxification and modulation — for example with potentised autologous blood — restoring the gut and resolving deficiencies.</p>
+        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Book an appointment</a></p>
+      </dialog>
+      <dialog class="kb-dialog" id="dlg-ozon">
+        <button class="kb-schliessen" aria-label="Close">×</button>
+        <h3>Ozone therapy</h3>
+        <p>Every living cell needs oxygen for its metabolism. Ozone is oxygen in its most energised, activated form.</p>
+        <h4>What can ozone do?</h4>
+        <ul>
+          <li>reduce inflammation and thereby relieve pain</li>
+          <li>promote blood circulation</li>
+          <li>regulate the immune response</li>
+          <li>stimulate metabolism and cellular respiration</li>
+          <li>enhance the effect of homeopathy and acupuncture</li>
+        </ul>
+        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Book an appointment</a></p>
+      </dialog>
+      <dialog class="kb-dialog" id="dlg-krampfadern">
+        <button class="kb-schliessen" aria-label="Close">×</button>
+        <h3>Varicose &amp; spider veins</h3>
+        <p>Saline varicose vein removal according to Dr. Rieger works with a saline solution — a substance naturally present in the body. No synthetic substances, no surgery, no anaesthesia.</p>
+        <h4>Advantages of the method</h4>
+        <ul>
+          <li>no anaesthesia required, bruising is rare</li>
+          <li>around 2 hours in total at the practice</li>
+          <li>initial treatment approx. €350 per leg</li>
+        </ul>
+        <p>Please download the <a href="../documents/aufklaerungsbogen-egon-philipp-heilpraktiker.pdf">consent form</a> (in German) and bring it completed to your appointment.</p>
+        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Book an appointment</a></p>
+      </dialog>
+      <dialog class="kb-dialog" id="dlg-ruecken">
+        <button class="kb-schliessen" aria-label="Close">×</button>
+        <h3>Back pain</h3>
+        <p>Lumbago usually strikes without warning: sharp pain in the lower back, often triggered by everyday sudden movements while bending, lifting or turning. Possible causes include blocked vertebral joints, disc changes or strained muscles and joint capsules.</p>
+        <h4>Treatment</h4>
+        <p>In the acute phase the focus is on pain relief, warmth and rest — with manual methods such as chiropractic and massage. Once the acute symptoms subside, the rule is: get moving again as soon as possible.</p>
+        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Book an appointment</a></p>
+      </dialog>
+      <dialog class="kb-dialog" id="dlg-haut">
+        <button class="kb-schliessen" aria-label="Close">×</button>
+        <h3>Skin conditions</h3>
+        <p>The skin expresses and excretes what happens in our metabolism — it is not called the "third kidney" for nothing. Skin symptoms therefore often point to underlying organ and metabolic issues, for example in the gut or the liver.</p>
+        <h4>Treatment</h4>
+        <p>Rather than treating only from the outside, therapy works "from within": finding the cause, restoring the gut, detoxification and modulation — for example with potentised autologous blood.</p>
+        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Book an appointment</a></p>
+      </dialog>
+      <dialog class="kb-dialog" id="dlg-erschoepfung">
+        <button class="kb-schliessen" aria-label="Close">×</button>
+        <h3>Exhaustion &amp; burn-out</h3>
+        <p>Performance pressure, relationship problems and existential worries keep the body in a state of constant alert. Nervousness, exhaustion, sleeplessness or low mood are often just the beginning of a cycle that, untreated, can develop into burn-out.</p>
+        <h4>Treatment</h4>
+        <p>Following the principles of regulatory therapy: identify and reduce stress factors, learn active relaxation (yoga, autogenic training), exercise in fresh air — and resolve deficiencies of vitamins B1, B6, B12 and folic acid. Acupuncture can provide additional balance.</p>
+        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Book an appointment</a></p>
+      </dialog>
+      <dialog class="kb-dialog" id="dlg-cholincitrat">
+        <button class="kb-schliessen" aria-label="Close">×</button>
+        <h3>Choline citrate infusions</h3>
+        <p>Choline citrate is a precursor of the neurotransmitter acetylcholine, which plays a key role in regulating the autonomic nervous system. A balanced nervous system needs the harmonious interplay of the sympathetic (activation) and parasympathetic (relaxation and regeneration) branches.</p>
+        <h4>When can the infusion help?</h4>
+        <p>In cases of inner restlessness, stress and exhaustion, choline citrate can support the parasympathetic system and help the body find its way back into balance — for deep relaxation and restful sleep.</p>
+        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Book an appointment</a></p>
+      </dialog>
+
       <script>
         (function(){
-          var wrap = document.getElementById('koerper-navigator');
-          if (!wrap) return;
-          wrap.querySelectorAll('[data-ziel]').forEach(function(el){
-            el.addEventListener('click', function(){
-              var ziel = document.getElementById(el.getAttribute('data-ziel'));
-              if (!ziel) return;
-              ziel.scrollIntoView({ behavior:'smooth', block:'center' });
-              ziel.classList.add('open');
-              ziel.setAttribute('aria-expanded', 'true');
+          var abschnitt = document.getElementById('schwerpunkte');
+          if (!abschnitt) return;
+
+          abschnitt.querySelectorAll('[data-dialog]').forEach(function(ausloeser){
+            ausloeser.addEventListener('click', function(){
+              if (ausloeser.dataset.bewegt === '1') { ausloeser.dataset.bewegt = ''; return; }
+              var dlg = document.getElementById(ausloeser.getAttribute('data-dialog'));
+              if (dlg && dlg.showModal) dlg.showModal();
             });
           });
+          abschnitt.querySelectorAll('.kb-dialog').forEach(function(dlg){
+            dlg.addEventListener('click', function(e){ if (e.target === dlg) dlg.close(); });
+            var x = dlg.querySelector('.kb-schliessen');
+            if (x) x.addEventListener('click', function(){ dlg.close(); });
+          });
+
+          abschnitt.querySelectorAll('.kb-karte[data-zone]').forEach(function(karte){
+            var punkt = abschnitt.querySelector('[data-zone-punkt="' + karte.getAttribute('data-zone') + '"]');
+            if (!punkt) return;
+            karte.addEventListener('mouseenter', function(){ punkt.classList.add('kb-aktiv'); });
+            karte.addEventListener('mouseleave', function(){ punkt.classList.remove('kb-aktiv'); });
+          });
+
+          var buehne = document.getElementById('kb-buehne');
+          var dreh = document.getElementById('kb-3d');
+          if (!buehne || !dreh) return;
+          var rot = 0, startX = 0, startRot = 0, zieht = false, ruheTimer = null, bewegtesZiel = null;
+          buehne.addEventListener('pointerdown', function(e){
+            zieht = true; startX = e.clientX; startRot = rot;
+            bewegtesZiel = e.target.closest ? e.target.closest('[data-dialog]') : null;
+            dreh.classList.add('kb-manuell');
+            dreh.style.transform = 'rotateY(' + rot + 'deg) rotateX(4deg)';
+            if (ruheTimer) clearTimeout(ruheTimer);
+          });
+          buehne.addEventListener('pointermove', function(e){
+            if (!zieht) return;
+            var delta = e.clientX - startX;
+            if (Math.abs(delta) > 6) { if (bewegtesZiel) bewegtesZiel.dataset.bewegt = '1'; if (buehne.setPointerCapture) { try { buehne.setPointerCapture(e.pointerId); } catch (err) {} } }
+            rot = Math.max(-60, Math.min(60, startRot + delta * 0.35));
+            dreh.style.transform = 'rotateY(' + rot + 'deg) rotateX(4deg)';
+          });
+          function loslassen(){
+            if (!zieht) return;
+            zieht = false;
+            ruheTimer = setTimeout(function(){
+              dreh.style.transition = 'transform 0.9s ease';
+              dreh.style.transform = '';
+              setTimeout(function(){
+                dreh.classList.remove('kb-manuell');
+                dreh.style.transition = '';
+                rot = 0;
+              }, 950);
+            }, 2600);
+          }
+          buehne.addEventListener('pointerup', loslassen);
+          buehne.addEventListener('pointercancel', loslassen);
         })();
       </script>
-    </section>
-
-    <!-- ===== Areas of treatment ===== -->
-    <section class="section" id="schwerpunkte">
-      <div class="container">
-        <div class="section-head">
-          <p class="section-kicker">How I can help</p>
-          <h2 class="section-title">Areas of treatment</h2>
-          <p class="section-intro">In addition to conventional medical findings, I take your personal history into account: habits, nutrition, family patterns and structures — and base your individual treatment on the full picture.</p>
-        </div>
-        <div class="cards">
-          <article class="card expandable" id="karte-allergien" tabindex="0">
-            <div class="card-icon"><img src="../assets/icon-allergien.svg?v=4" alt=""></div>
-            <h3>Allergies</h3>
-            <p>Up to 20 percent of Germans now suffer from an allergy — a misregulation of the immune system that naturopathy can help address.</p>
-            <div class="card-details">
-              <p>In an allergy, the immune system reacts against substances that are actually harmless. From a naturopathic perspective, burdens on the connective tissue play a major role — heavy metals, environmental toxins, medication or intestinal imbalances build up in the body as waste does in a bin, until it overflows: that is when the illness breaks out.</p>
-              <h4>Treatment</h4>
-              <p>It starts with finding the cause. Long-term treatment focuses on detoxification and modulation — for example with potentised autologous blood — restoring the gut and resolving deficiencies.</p>
-            </div>
-            <p class="card-more">Learn more +</p>
-          </article>
-          <article class="card expandable" id="karte-ruecken" tabindex="0">
-            <div class="card-icon"><img src="../assets/icon-ruecken.svg?v=4" alt=""></div>
-            <h3>Back pain</h3>
-            <p>From lumbago to chronic tension: chiropractic, Baunscheidt therapy and Bowen therapy used in combination.</p>
-            <div class="card-details">
-              <p>Lumbago usually strikes without warning: sharp pain in the lower back, often triggered by everyday sudden movements while bending, lifting or turning. Possible causes include blocked vertebral joints, disc changes or strained muscles and joint capsules.</p>
-              <h4>Treatment</h4>
-              <p>In the acute phase the focus is on pain relief, warmth and rest — with manual methods such as chiropractic and massage. Once the acute symptoms subside, the rule is: get moving again as soon as possible.</p>
-            </div>
-            <p class="card-more">Learn more +</p>
-          </article>
-          <article class="card expandable" id="karte-haut" tabindex="0">
-            <div class="card-icon"><img src="../assets/icon-haut.svg?v=4" alt=""></div>
-            <h3>Skin conditions</h3>
-            <p>Chronic skin problems such as neurodermatitis are on the rise — especially among children and teenagers. Holistic care instead of treating symptoms only.</p>
-            <div class="card-details">
-              <p>The skin expresses and excretes what happens in our metabolism — it is not called the "third kidney" for nothing. Skin symptoms therefore often point to underlying organ and metabolic issues, for example in the gut or the liver.</p>
-              <h4>Treatment</h4>
-              <p>Rather than treating only from the outside, therapy works "from within": finding the cause, restoring the gut, detoxification and modulation — for example with potentised autologous blood.</p>
-            </div>
-            <p class="card-more">Learn more +</p>
-          </article>
-          <article class="card expandable" id="karte-konzentration" tabindex="0">
-            <div class="card-icon"><img src="../assets/icon-kinder.svg?v=4" alt=""></div>
-            <h3>Concentration &amp; ADD/ADHD</h3>
-            <p>Learning difficulties and attention deficits in children play an ever greater role in my practice.</p>
-            <div class="card-details">
-              <p>Affected children often show excessive restlessness, difficulty concentrating, dyslexia or a low frustration threshold — a heavy burden for children, parents and teachers alike.</p>
-              <h4>Treatment</h4>
-              <p>The key principle is individual investigation of the causes: nutrition (e.g. sugar), mineral deficiencies, lack of exercise and family structures are considered alongside possible burdens on the organism. Treatment is then tailored homeopathically to the individual child.</p>
-              <p><a href="kinder.html">More in the children's section →</a></p>
-            </div>
-            <p class="card-more">Learn more +</p>
-          </article>
-          <article class="card expandable" id="karte-erschoepfung" tabindex="0">
-            <div class="card-icon"><img src="../assets/icon-burnout.svg?v=4" alt=""></div>
-            <h3>Exhaustion &amp; burn-out</h3>
-            <p>When work, family and everyday life drain your energy: regeneration and strengthening of your own resources.</p>
-            <div class="card-details">
-              <p>Performance pressure, relationship problems and existential worries keep the body in a state of constant alert. Nervousness, exhaustion, sleeplessness or low mood are often just the beginning of a cycle that, untreated, can develop into burn-out.</p>
-              <h4>Treatment</h4>
-              <p>Following the principles of regulatory therapy: identify and reduce stress factors, learn active relaxation (yoga, autogenic training), exercise in fresh air — and resolve deficiencies of vitamins B1, B6, B12 and folic acid. Acupuncture can provide additional balance.</p>
-            </div>
-            <p class="card-more">Learn more +</p>
-          </article>
-          <article class="card expandable" id="karte-krampfadern" tabindex="0">
-            <div class="card-icon"><img src="../assets/icon-krampfadern.svg?v=4" alt=""></div>
-            <h3>Varicose &amp; spider veins</h3>
-            <p>Biologically gentle varicose vein removal — trained by Dr. Bernhard Rieger, Bamberg.</p>
-            <div class="card-details">
-              <p>Saline varicose vein removal according to Dr. Rieger works with a saline solution — a substance naturally present in the body. No synthetic substances, no surgery, no anaesthesia.</p>
-              <h4>Advantages of the method</h4>
-              <ul>
-                <li>no anaesthesia required, bruising is rare</li>
-                <li>around 2 hours in total at the practice</li>
-                <li>initial treatment approx. €350 per leg</li>
-              </ul>
-              <p>Please download the <a href="../documents/aufklaerungsbogen-egon-philipp-heilpraktiker.pdf">consent form</a> (in German) and bring it completed to your appointment.</p>
-            </div>
-            <p class="card-more">Learn more +</p>
-          </article>
-          <article class="card expandable" id="karte-ozon" tabindex="0">
-            <div class="card-icon"><img src="../assets/icon-ozon.svg?v=4" alt=""></div>
-            <h3>Ozone therapy</h3>
-            <p>No life without oxygen: activated oxygen (O₃) as the most energy-rich form of oxygen for cell metabolism and vitality.</p>
-            <div class="card-details">
-              <p>Every living cell needs oxygen for its metabolism. Ozone is oxygen in its most energised, activated form.</p>
-              <h4>What can ozone do?</h4>
-              <ul>
-                <li>reduce inflammation and thereby relieve pain</li>
-                <li>promote blood circulation</li>
-                <li>regulate the immune response</li>
-                <li>stimulate metabolism and cellular respiration</li>
-                <li>enhance the effect of homeopathy and acupuncture</li>
-              </ul>
-            </div>
-            <p class="card-more">Learn more +</p>
-          </article>
-          <article class="card expandable" id="karte-cholincitrat" tabindex="0">
-            <div class="card-icon"><img src="../assets/icon-cholincitrat.svg?v=4" alt=""></div>
-            <h3>Choline citrate infusions</h3>
-            <p>Deep relaxation: choline citrate infusions can support the autonomic nervous system — for inner calm and balance.</p>
-            <div class="card-details">
-              <p>Choline citrate is a precursor of the neurotransmitter acetylcholine, which plays a key role in regulating the autonomic nervous system. A balanced nervous system needs the harmonious interplay of the sympathetic (activation) and parasympathetic (relaxation and regeneration) branches.</p>
-              <h4>When can the infusion help?</h4>
-              <p>In cases of inner restlessness, stress and exhaustion, choline citrate can support the parasympathetic system and help the body find its way back into balance — for deep relaxation and restful sleep.</p>
-            </div>
-            <p class="card-more">Learn more +</p>
-          </article>
-        </div>
-      </div>
     </section>
 
     <!-- ===== Pointer to the children's section ===== -->
