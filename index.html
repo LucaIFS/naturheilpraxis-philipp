@@ -118,6 +118,11 @@
         .kb-karte p{ font-size:0.87rem; color:var(--muted, #5c5c5c); margin:0 0 0.6rem; line-height:1.45; }
         .kb-mehr{ background:none; border:none; padding:0; color:var(--green-600, #2f7d4f); font-weight:600; font-size:0.87rem; cursor:pointer; }
         .kb-mehr:hover, .kb-mehr:focus-visible{ text-decoration:underline; }
+        .kb-karte.kb-offen{ border-color:var(--gold, #c9a24b); box-shadow:0 8px 22px rgba(20,46,33,0.14); }
+        .kb-detail{ margin:0.5rem 0 0.7rem; border-top:1px solid rgba(20,46,33,0.08); padding-top:0.6rem; }
+        .kb-detail p, .kb-detail li{ font-size:0.85rem; color:var(--ink, #2c2c2c); line-height:1.5; margin:0 0 0.5rem; }
+        .kb-detail h4{ font-size:0.9rem; color:var(--green-800, #1e4d33); margin:0.6rem 0 0.3rem; }
+        .kb-detail ul{ padding-left:1.1rem; margin:0.3rem 0 0.5rem; }
         .kb-buehne{ perspective:1000px; width:min(300px, 74vw); margin:0 auto; cursor:grab; touch-action:pan-y; user-select:none; -webkit-user-select:none; }
         .kb-buehne:active{ cursor:grabbing; }
         .kb-3d{ position:relative; transform-style:preserve-3d; animation:kb-dreh 10s ease-in-out infinite alternate; }
@@ -150,22 +155,58 @@
             <article class="kb-karte" id="karte-konzentration" data-zone="konzentration">
               <h3>Konzentration &amp; ADS/ADHS</h3>
               <p>Lernstörungen und Aufmerksamkeitsdefizite bei Kindern nehmen in meiner Praxis einen immer größeren Stellenwert ein.</p>
-              <button class="kb-mehr" data-dialog="dlg-konzentration">Mehr erfahren →</button>
+              <div class="kb-detail" hidden>
+        <p>Betroffene Kinder zeigen oft exzessive Ruhelosigkeit, Konzentrationsschwierigkeiten, Lese-Rechtschreib-Schwäche oder hohe Frustanfälligkeit — eine große Belastung für Kinder, Eltern und Lehrer gleichermaßen.</p>
+        <h4>Therapie</h4>
+        <p>Wichtigstes Behandlungsprinzip ist die individuelle Ursachenforschung: Ernährung (z.&nbsp;B. Zucker), Mineralstoffdefizite, Bewegungsmangel und familiäre Strukturen werden ebenso betrachtet wie mögliche Belastungen des Organismus. Darauf aufbauend wird individuell homöopathisch behandelt.</p>
+        <p><a href="kinder.html">Mehr im Kinder-Bereich →</a></p>
+        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></p>
+              </div>
+              <button class="kb-mehr" data-zone-toggle="konzentration">Mehr erfahren →</button>
             </article>
             <article class="kb-karte" id="karte-allergien" data-zone="allergien">
               <h3>Allergien</h3>
               <p>Bis zu 20 Prozent der Deutschen leiden unter einer Allergie — einer Fehlregulation des Immunsystems, die sich naturheilkundlich begleiten lässt.</p>
-              <button class="kb-mehr" data-dialog="dlg-allergien">Mehr erfahren →</button>
+              <div class="kb-detail" hidden>
+        <p>Bei einer Allergie richtet sich die Abwehrreaktion des Immunsystems gegen eigentlich harmlose Stoffe. Aus naturheilkundlicher Sicht spielen dabei Belastungen des Bindegewebes eine große Rolle — Schwermetalle, Umweltstoffe, Medikamente oder Darmbelastungen sammeln sich an wie in einem Mülleimer, bis er überläuft: Das ist der Ausbruch der Erkrankung.</p>
+        <h4>Therapie</h4>
+        <p>Am Anfang steht die Ursachenforschung. Langfristig wird entgiftet und umgestimmt — beispielsweise mit potenziertem Eigenblut —, der Darm saniert und Mangelzustände werden behoben.</p>
+        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></p>
+              </div>
+              <button class="kb-mehr" data-zone-toggle="allergien">Mehr erfahren →</button>
             </article>
             <article class="kb-karte" id="karte-ozon" data-zone="ozon">
               <h3>Ozon-Therapie</h3>
               <p>Ohne Sauerstoff kein Leben: Aktivsauerstoff (O₃) als energiereiche Form des Sauerstoffs für Zellstoffwechsel und Vitalität.</p>
-              <button class="kb-mehr" data-dialog="dlg-ozon">Mehr erfahren →</button>
+              <div class="kb-detail" hidden>
+        <p>Jede lebende Zelle benötigt Sauerstoff für ihren Stoffwechsel. Ozon ist Sauerstoff in seiner energiereichsten, aktivierten Form.</p>
+        <h4>Was kann Ozon bewirken?</h4>
+        <ul>
+          <li>Entzündungen hemmen und dadurch Schmerzen reduzieren</li>
+          <li>die Durchblutung fördern</li>
+          <li>die Immunabwehr regulieren</li>
+          <li>Stoffwechsel und Zellatmung anregen</li>
+          <li>die Wirkung von Homöopathie und Akupunktur verstärken</li>
+        </ul>
+        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></p>
+              </div>
+              <button class="kb-mehr" data-zone-toggle="ozon">Mehr erfahren →</button>
             </article>
             <article class="kb-karte" id="karte-krampfadern" data-zone="krampfadern">
               <h3>Krampfadern &amp; Besenreiser</h3>
               <p>Biologisch sanfte Krampfaderentfernung — Ausbildung bei Dr. Bernhard Rieger, Bamberg.</p>
-              <button class="kb-mehr" data-dialog="dlg-krampfadern">Mehr erfahren →</button>
+              <div class="kb-detail" hidden>
+        <p>Bei der salinen Krampfaderentfernung nach Dr. Rieger wird mit Kochsalzlösung gearbeitet — einem Stoff, der naturgemäß im Körper vorkommt. Keine synthetischen Substanzen, keine Operation, keine Narkose.</p>
+        <h4>Vorteile der Methode</h4>
+        <ul>
+          <li>keine Narkose erforderlich, Blutergüsse sind selten</li>
+          <li>ca. 2 Stunden Gesamtaufwand in der Praxis</li>
+          <li>Erstbehandlung ca. 350&nbsp;€ pro Bein</li>
+        </ul>
+        <p>Bitte vor dem Termin den <a href="documents/aufklaerungsbogen-egon-philipp-heilpraktiker.pdf">Aufklärungsbogen</a> herunterladen und ausgefüllt mitbringen.</p>
+        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></p>
+              </div>
+              <button class="kb-mehr" data-zone-toggle="krampfadern">Mehr erfahren →</button>
             </article>
           </div>
           <div class="kb-mitte">
@@ -193,14 +234,14 @@
                     </g>
                   </g>
                 </svg>
-                <button class="kb-punkt" style="left:50%; top:8%;" data-zone-punkt="konzentration" data-dialog="dlg-konzentration" title="Konzentration &amp; ADS/ADHS" aria-label="Kopf: Konzentration und ADS/ADHS"></button>
-                <button class="kb-punkt" style="left:59%; top:11%;" data-zone-punkt="haut" data-dialog="dlg-haut" title="Hauterkrankungen" aria-label="Haut: Hauterkrankungen"></button>
-                <button class="kb-punkt" style="left:64%; top:21%;" data-zone-punkt="ruecken" data-dialog="dlg-ruecken" title="Rückenbeschwerden" aria-label="Rücken und Schulter: Rückenbeschwerden"></button>
-                <button class="kb-punkt" style="left:41%; top:30%;" data-zone-punkt="allergien" data-dialog="dlg-allergien" title="Allergien" aria-label="Atemwege: Allergien"></button>
-                <button class="kb-punkt" style="left:50%; top:29%;" data-zone-punkt="erschoepfung" data-dialog="dlg-erschoepfung" title="Erschöpfung &amp; Burn-out" aria-label="Herz: Erschöpfung und Burn-out"></button>
-                <button class="kb-punkt" style="left:44%; top:43%;" data-zone-punkt="ozon" data-dialog="dlg-ozon" title="Ozon-Therapie" aria-label="Stoffwechsel: Ozon-Therapie"></button>
-                <button class="kb-punkt" style="left:74%; top:44%;" data-zone-punkt="cholincitrat" data-dialog="dlg-cholincitrat" title="Cholincitrat-Infusionen" aria-label="Vene am Arm: Cholincitrat-Infusionen"></button>
-                <button class="kb-punkt" style="left:42%; top:83%;" data-zone-punkt="krampfadern" data-dialog="dlg-krampfadern" title="Krampfadern &amp; Besenreiser" aria-label="Bein: Krampfadern und Besenreiser"></button>
+                <button class="kb-punkt" style="left:50%; top:8%;" data-zone-punkt="konzentration" title="Konzentration &amp; ADS/ADHS" aria-label="Kopf: Konzentration und ADS/ADHS"></button>
+                <button class="kb-punkt" style="left:59%; top:11%;" data-zone-punkt="haut" title="Hauterkrankungen" aria-label="Haut: Hauterkrankungen"></button>
+                <button class="kb-punkt" style="left:64%; top:21%;" data-zone-punkt="ruecken" title="Rückenbeschwerden" aria-label="Rücken und Schulter: Rückenbeschwerden"></button>
+                <button class="kb-punkt" style="left:41%; top:30%;" data-zone-punkt="allergien" title="Allergien" aria-label="Atemwege: Allergien"></button>
+                <button class="kb-punkt" style="left:50%; top:29%;" data-zone-punkt="erschoepfung" title="Erschöpfung &amp; Burn-out" aria-label="Herz: Erschöpfung und Burn-out"></button>
+                <button class="kb-punkt" style="left:44%; top:43%;" data-zone-punkt="ozon" title="Ozon-Therapie" aria-label="Stoffwechsel: Ozon-Therapie"></button>
+                <button class="kb-punkt" style="left:74%; top:44%;" data-zone-punkt="cholincitrat" title="Cholincitrat-Infusionen" aria-label="Vene am Arm: Cholincitrat-Infusionen"></button>
+                <button class="kb-punkt" style="left:42%; top:83%;" data-zone-punkt="krampfadern" title="Krampfadern &amp; Besenreiser" aria-label="Bein: Krampfadern und Besenreiser"></button>
               </div>
             </div>
             <div class="kb-boden" aria-hidden="true"></div>
@@ -211,103 +252,51 @@
             <article class="kb-karte" id="karte-ruecken" data-zone="ruecken">
               <h3>Rückenbeschwerden</h3>
               <p>Vom Hexenschuss bis zu chronischen Verspannungen: Chiropraktik, Baunscheidtieren und Bowen-Therapie im kombinierten Einsatz.</p>
-              <button class="kb-mehr" data-dialog="dlg-ruecken">Mehr erfahren →</button>
+              <div class="kb-detail" hidden>
+        <p>Der Hexenschuss (Lumbago) trifft die Betroffenen meist akut: stichartige Schmerzen im unteren Rücken, oft ausgelöst durch alltägliche, ruckartige Bewegungen beim Bücken, Heben oder Drehen. Ursachen können blockierte Wirbelgelenke, Bandscheibenveränderungen oder Muskel- und Kapselzerrungen sein.</p>
+        <h4>Therapie</h4>
+        <p>In der akuten Phase stehen Schmerzlinderung, Wärme und Ruhe im Vordergrund — mit manuellen Verfahren wie Chiropraktik und Massagen. Sobald die akuten Beschwerden abklingen, gilt: möglichst bald zurück in die Bewegung.</p>
+        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></p>
+              </div>
+              <button class="kb-mehr" data-zone-toggle="ruecken">Mehr erfahren →</button>
             </article>
             <article class="kb-karte" id="karte-haut" data-zone="haut">
               <h3>Hauterkrankungen</h3>
               <p>Chronische Hautprobleme wie Neurodermitis nehmen zu — gerade bei Kindern und Jugendlichen. Ganzheitliche Begleitung statt reiner Symptombehandlung.</p>
-              <button class="kb-mehr" data-dialog="dlg-haut">Mehr erfahren →</button>
+              <div class="kb-detail" hidden>
+        <p>Die Haut ist Ausdrucks- und Ausscheidungsorgan unseres Stoffwechsels — sie wird nicht umsonst die „Dritte Niere“ genannt. Hautsymptome erlauben deshalb oft Rückschlüsse auf innere Organ- und Stoffwechselstörungen, etwa im Darm oder in der Leber.</p>
+        <h4>Therapie</h4>
+        <p>Statt nur äußerlich zu behandeln, wird „von innen“ therapiert: Ursachenforschung, Darmsanierung, Entgiftung und Umstimmung — beispielsweise mit potenziertem Eigenblut.</p>
+        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></p>
+              </div>
+              <button class="kb-mehr" data-zone-toggle="haut">Mehr erfahren →</button>
             </article>
             <article class="kb-karte" id="karte-erschoepfung" data-zone="erschoepfung">
               <h3>Erschöpfung &amp; Burn-out</h3>
               <p>Wenn Beruf, Familie und Alltag die Kräfte aufzehren: Regeneration und Stärkung der eigenen Ressourcen.</p>
-              <button class="kb-mehr" data-dialog="dlg-erschoepfung">Mehr erfahren →</button>
+              <div class="kb-detail" hidden>
+        <p>Leistungsdruck, Partnerschaftsprobleme und existenzielle Sorgen versetzen den Körper in einen dauerhaften Alarmzustand. Nervosität, Erschöpfung, Schlaflosigkeit oder Verstimmung stehen oft am Anfang eines Kreislaufs, der sich unbehandelt bis zum Burn-out entwickeln kann.</p>
+        <h4>Therapie</h4>
+        <p>Im Sinne einer Ordnungstherapie: Stressfaktoren erkennen und minimieren, aktive Entspannung erlernen (Yoga, autogenes Training), Bewegung an frischer Luft — und Mangelzustände der Vitamine B1, B6, B12 und Folsäure ausgleichen. Akupunktur kann zusätzlich harmonisierend wirken.</p>
+        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></p>
+              </div>
+              <button class="kb-mehr" data-zone-toggle="erschoepfung">Mehr erfahren →</button>
             </article>
             <article class="kb-karte" id="karte-cholincitrat" data-zone="cholincitrat">
               <h3>Cholincitrat-Infusionen</h3>
               <p>Absolute Entspannung: Infusionen mit Cholincitrat können das vegetative Nervensystem unterstützen — für innere Ruhe und Ausgeglichenheit.</p>
-              <button class="kb-mehr" data-dialog="dlg-cholincitrat">Mehr erfahren →</button>
+              <div class="kb-detail" hidden>
+        <p>Cholincitrat ist eine Vorstufe des Neurotransmitters Acetylcholin, der maßgeblich an der Regulation des vegetativen Nervensystems beteiligt ist. Ein ausgeglichenes Nervensystem braucht das harmonische Zusammenspiel von Sympathikus (Aktivierung) und Parasympathikus (Entspannung und Regeneration).</p>
+        <h4>Wann kann die Infusion unterstützen?</h4>
+        <p>Bei innerer Unruhe, Stress und Erschöpfung kann Cholincitrat den Parasympathikus unterstützen und so dem Körper helfen, wieder in die Balance zu finden — für tiefe Entspannung und erholsamen Schlaf.</p>
+        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></p>
+              </div>
+              <button class="kb-mehr" data-zone-toggle="cholincitrat">Mehr erfahren →</button>
             </article>
           </div>
         </div>
       </div>
 
-      <dialog class="kb-dialog" id="dlg-konzentration">
-        <button class="kb-schliessen" aria-label="Schließen">×</button>
-        <h3>Konzentration &amp; ADS/ADHS</h3>
-        <p>Betroffene Kinder zeigen oft exzessive Ruhelosigkeit, Konzentrationsschwierigkeiten, Lese-Rechtschreib-Schwäche oder hohe Frustanfälligkeit — eine große Belastung für Kinder, Eltern und Lehrer gleichermaßen.</p>
-        <h4>Therapie</h4>
-        <p>Wichtigstes Behandlungsprinzip ist die individuelle Ursachenforschung: Ernährung (z.&nbsp;B. Zucker), Mineralstoffdefizite, Bewegungsmangel und familiäre Strukturen werden ebenso betrachtet wie mögliche Belastungen des Organismus. Darauf aufbauend wird individuell homöopathisch behandelt.</p>
-        <p><a href="kinder.html">Mehr im Kinder-Bereich →</a></p>
-        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></p>
-      </dialog>
-      <dialog class="kb-dialog" id="dlg-allergien">
-        <button class="kb-schliessen" aria-label="Schließen">×</button>
-        <h3>Allergien</h3>
-        <p>Bei einer Allergie richtet sich die Abwehrreaktion des Immunsystems gegen eigentlich harmlose Stoffe. Aus naturheilkundlicher Sicht spielen dabei Belastungen des Bindegewebes eine große Rolle — Schwermetalle, Umweltstoffe, Medikamente oder Darmbelastungen sammeln sich an wie in einem Mülleimer, bis er überläuft: Das ist der Ausbruch der Erkrankung.</p>
-        <h4>Therapie</h4>
-        <p>Am Anfang steht die Ursachenforschung. Langfristig wird entgiftet und umgestimmt — beispielsweise mit potenziertem Eigenblut —, der Darm saniert und Mangelzustände werden behoben.</p>
-        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></p>
-      </dialog>
-      <dialog class="kb-dialog" id="dlg-ozon">
-        <button class="kb-schliessen" aria-label="Schließen">×</button>
-        <h3>Ozon-Therapie</h3>
-        <p>Jede lebende Zelle benötigt Sauerstoff für ihren Stoffwechsel. Ozon ist Sauerstoff in seiner energiereichsten, aktivierten Form.</p>
-        <h4>Was kann Ozon bewirken?</h4>
-        <ul>
-          <li>Entzündungen hemmen und dadurch Schmerzen reduzieren</li>
-          <li>die Durchblutung fördern</li>
-          <li>die Immunabwehr regulieren</li>
-          <li>Stoffwechsel und Zellatmung anregen</li>
-          <li>die Wirkung von Homöopathie und Akupunktur verstärken</li>
-        </ul>
-        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></p>
-      </dialog>
-      <dialog class="kb-dialog" id="dlg-krampfadern">
-        <button class="kb-schliessen" aria-label="Schließen">×</button>
-        <h3>Krampfadern &amp; Besenreiser</h3>
-        <p>Bei der salinen Krampfaderentfernung nach Dr. Rieger wird mit Kochsalzlösung gearbeitet — einem Stoff, der naturgemäß im Körper vorkommt. Keine synthetischen Substanzen, keine Operation, keine Narkose.</p>
-        <h4>Vorteile der Methode</h4>
-        <ul>
-          <li>keine Narkose erforderlich, Blutergüsse sind selten</li>
-          <li>ca. 2 Stunden Gesamtaufwand in der Praxis</li>
-          <li>Erstbehandlung ca. 350&nbsp;€ pro Bein</li>
-        </ul>
-        <p>Bitte vor dem Termin den <a href="documents/aufklaerungsbogen-egon-philipp-heilpraktiker.pdf">Aufklärungsbogen</a> herunterladen und ausgefüllt mitbringen.</p>
-        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></p>
-      </dialog>
-      <dialog class="kb-dialog" id="dlg-ruecken">
-        <button class="kb-schliessen" aria-label="Schließen">×</button>
-        <h3>Rückenbeschwerden</h3>
-        <p>Der Hexenschuss (Lumbago) trifft die Betroffenen meist akut: stichartige Schmerzen im unteren Rücken, oft ausgelöst durch alltägliche, ruckartige Bewegungen beim Bücken, Heben oder Drehen. Ursachen können blockierte Wirbelgelenke, Bandscheibenveränderungen oder Muskel- und Kapselzerrungen sein.</p>
-        <h4>Therapie</h4>
-        <p>In der akuten Phase stehen Schmerzlinderung, Wärme und Ruhe im Vordergrund — mit manuellen Verfahren wie Chiropraktik und Massagen. Sobald die akuten Beschwerden abklingen, gilt: möglichst bald zurück in die Bewegung.</p>
-        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></p>
-      </dialog>
-      <dialog class="kb-dialog" id="dlg-haut">
-        <button class="kb-schliessen" aria-label="Schließen">×</button>
-        <h3>Hauterkrankungen</h3>
-        <p>Die Haut ist Ausdrucks- und Ausscheidungsorgan unseres Stoffwechsels — sie wird nicht umsonst die „Dritte Niere“ genannt. Hautsymptome erlauben deshalb oft Rückschlüsse auf innere Organ- und Stoffwechselstörungen, etwa im Darm oder in der Leber.</p>
-        <h4>Therapie</h4>
-        <p>Statt nur äußerlich zu behandeln, wird „von innen“ therapiert: Ursachenforschung, Darmsanierung, Entgiftung und Umstimmung — beispielsweise mit potenziertem Eigenblut.</p>
-        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></p>
-      </dialog>
-      <dialog class="kb-dialog" id="dlg-erschoepfung">
-        <button class="kb-schliessen" aria-label="Schließen">×</button>
-        <h3>Erschöpfung &amp; Burn-out</h3>
-        <p>Leistungsdruck, Partnerschaftsprobleme und existenzielle Sorgen versetzen den Körper in einen dauerhaften Alarmzustand. Nervosität, Erschöpfung, Schlaflosigkeit oder Verstimmung stehen oft am Anfang eines Kreislaufs, der sich unbehandelt bis zum Burn-out entwickeln kann.</p>
-        <h4>Therapie</h4>
-        <p>Im Sinne einer Ordnungstherapie: Stressfaktoren erkennen und minimieren, aktive Entspannung erlernen (Yoga, autogenes Training), Bewegung an frischer Luft — und Mangelzustände der Vitamine B1, B6, B12 und Folsäure ausgleichen. Akupunktur kann zusätzlich harmonisierend wirken.</p>
-        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></p>
-      </dialog>
-      <dialog class="kb-dialog" id="dlg-cholincitrat">
-        <button class="kb-schliessen" aria-label="Schließen">×</button>
-        <h3>Cholincitrat-Infusionen</h3>
-        <p>Cholincitrat ist eine Vorstufe des Neurotransmitters Acetylcholin, der maßgeblich an der Regulation des vegetativen Nervensystems beteiligt ist. Ein ausgeglichenes Nervensystem braucht das harmonische Zusammenspiel von Sympathikus (Aktivierung) und Parasympathikus (Entspannung und Regeneration).</p>
-        <h4>Wann kann die Infusion unterstützen?</h4>
-        <p>Bei innerer Unruhe, Stress und Erschöpfung kann Cholincitrat den Parasympathikus unterstützen und so dem Körper helfen, wieder in die Balance zu finden — für tiefe Entspannung und erholsamen Schlaf.</p>
-        <p style="margin-top:1.1rem;"><a href="kontakt.html" class="btn btn-primary btn-small">Termin vereinbaren</a></p>
-      </dialog>
 
       <script>
         (function(){
@@ -315,17 +304,36 @@
           if (!abschnitt) return;
 
           // Dialoge öffnen/schließen
-          abschnitt.querySelectorAll('[data-dialog]').forEach(function(ausloeser){
-            ausloeser.addEventListener('click', function(){
-              if (ausloeser.dataset.bewegt === '1') { ausloeser.dataset.bewegt = ''; return; }
-              var dlg = document.getElementById(ausloeser.getAttribute('data-dialog'));
-              if (dlg && dlg.showModal) dlg.showModal();
+          var MEHR = 'Mehr erfahren →', WENIGER = 'Weniger anzeigen ↑';
+          function kbZeigeThema(zone, aufklappen){
+            abschnitt.querySelectorAll('.kb-karte[data-zone]').forEach(function(k){
+              if (k.getAttribute('data-zone') === zone) return;
+              k.classList.remove('kb-offen');
+              var d = k.querySelector('.kb-detail'); if (d) d.hidden = true;
+              var b = k.querySelector('.kb-mehr'); if (b) b.textContent = MEHR;
             });
+            var karte = abschnitt.querySelector('.kb-karte[data-zone="' + zone + '"]');
+            if (!karte) return;
+            var det = karte.querySelector('.kb-detail');
+            var btn = karte.querySelector('.kb-mehr');
+            var offen = (aufklappen === undefined) ? det.hidden : aufklappen;
+            det.hidden = !offen;
+            karte.classList.toggle('kb-offen', offen);
+            if (btn) btn.textContent = offen ? WENIGER : MEHR;
+            if (offen) {
+              karte.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              document.dispatchEvent(new CustomEvent('kb-thema', { detail: zone }));
+            }
+          }
+          window.kbZeigeThema = kbZeigeThema;
+          abschnitt.querySelectorAll('[data-zone-toggle]').forEach(function(b){
+            b.addEventListener('click', function(){ kbZeigeThema(b.getAttribute('data-zone-toggle')); });
           });
-          abschnitt.querySelectorAll('.kb-dialog').forEach(function(dlg){
-            dlg.addEventListener('click', function(e){ if (e.target === dlg) dlg.close(); });
-            var x = dlg.querySelector('.kb-schliessen');
-            if (x) x.addEventListener('click', function(){ dlg.close(); });
+          abschnitt.querySelectorAll('.kb-punkt[data-zone-punkt]').forEach(function(p){
+            p.addEventListener('click', function(){
+              if (p.dataset.bewegt === '1') { p.dataset.bewegt = ''; return; }
+              kbZeigeThema(p.getAttribute('data-zone-punkt'), true);
+            });
           });
 
           // Karte <-> Punkt Hover-Kopplung
@@ -343,7 +351,7 @@
           var rot = 0, startX = 0, startRot = 0, zieht = false, ruheTimer = null, bewegtesZiel = null;
           buehne.addEventListener('pointerdown', function(e){
             zieht = true; startX = e.clientX; startRot = rot;
-            bewegtesZiel = e.target.closest ? e.target.closest('[data-dialog]') : null;
+            bewegtesZiel = e.target.closest ? e.target.closest('.kb-punkt') : null;
             dreh.classList.add('kb-manuell');
             dreh.style.transform = 'rotateY(' + rot + 'deg) rotateX(4deg)';
             if (ruheTimer) clearTimeout(ruheTimer);
@@ -372,7 +380,7 @@
           buehne.addEventListener('pointercancel', loslassen);
         })();
       </script>
-      <script type="module" src="assets/3d/koerper-viewer.js?v=1"></script>
+      <script type="module" src="assets/3d/koerper-viewer.js?v=3"></script>
     </section>
 
     <!-- ===== Hinweis auf den Kinder-Bereich ===== -->

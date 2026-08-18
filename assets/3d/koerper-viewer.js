@@ -8,13 +8,24 @@ import { OrbitControls } from './OrbitControls.js';
 const buehne = document.getElementById('kb-buehne');
 if (buehne && window.WebGLRenderingContext) {
   const basis = buehne.getAttribute('data-basis') || 'assets/3d/';
-  const beobachter = new IntersectionObserver((eintraege) => {
-    if (eintraege.some((e) => e.isIntersecting)) {
-      beobachter.disconnect();
+  // Lazy-Start, sobald die Bühne in Sichtweite kommt — bewusst ohne IntersectionObserver,
+  // der in manchen Umgebungen (versteckte Tabs, Prerender) nie feuert.
+  let gestartet = false;
+  function sichtPruefung() {
+    if (gestartet) return;
+    const r = buehne.getBoundingClientRect();
+    const sichtbar = r.top < (window.innerHeight || 800) + 400 && r.bottom > -400;
+    if (sichtbar) {
+      gestartet = true;
+      window.removeEventListener('scroll', sichtPruefung);
+      window.removeEventListener('resize', sichtPruefung);
       starten();
     }
-  }, { rootMargin: '300px' });
-  beobachter.observe(buehne);
+  }
+  window.addEventListener('scroll', sichtPruefung, { passive: true });
+  window.addEventListener('resize', sichtPruefung);
+  setTimeout(sichtPruefung, 0);
+  setTimeout(sichtPruefung, 1200);
 
   function starten() {
     let renderer;
@@ -46,10 +57,10 @@ if (buehne && window.WebGLRenderingContext) {
       dickdarm:  new THREE.MeshStandardMaterial({ color: 0xc98e50, roughness: 0.6, emissive: 0x36220e, emissiveIntensity: 0.3 }),
     };
 
-    // Organ -> Dialog (Klick direkt aufs Organ)
-    const organDialog = {
-      gehirn: 'dlg-konzentration', lunge: 'dlg-allergien', herz: 'dlg-erschoepfung',
-      duenndarm: 'dlg-ozon', dickdarm: 'dlg-ozon', leber: 'dlg-ozon', haut: 'dlg-haut',
+    // Organ -> Themenzone (Klick direkt aufs Organ öffnet die Karte daneben)
+    const organZone = {
+      gehirn: 'konzentration', lunge: 'allergien', herz: 'erschoepfung',
+      duenndarm: 'ozon', dickdarm: 'ozon', leber: 'ozon', haut: 'haut',
     };
 
     new GLTFLoader().load(basis + 'koerper.glb?v=1', (gltf) => {
@@ -61,7 +72,7 @@ if (buehne && window.WebGLRenderingContext) {
         meshes[name] = kind;
         if (materialien[name]) kind.material = materialien[name];
         kind.renderOrder = name === 'haut' ? 2 : 1;
-        kind.userData.dialog = organDialog[name] || null;
+        kind.userData.zone = organZone[name] || null;
       });
       szene.add(gltf.scene);
 
@@ -81,11 +92,6 @@ if (buehne && window.WebGLRenderingContext) {
       anker.cholincitrat = new THREE.Vector3(0.30, -0.05, 0.04);
       anker.krampfadern = new THREE.Vector3(0.12, -0.56, 0.06);
 
-      const punktDialog = {
-        konzentration: 'dlg-konzentration', haut: 'dlg-haut', allergien: 'dlg-allergien',
-        erschoepfung: 'dlg-erschoepfung', ruecken: 'dlg-ruecken', ozon: 'dlg-ozon',
-        cholincitrat: 'dlg-cholincitrat', krampfadern: 'dlg-krampfadern',
-      };
 
       // Punkt-Textur (grüner Punkt mit weißem Ring) einmal zeichnen
       function punktTextur(farbe) {
@@ -107,18 +113,31 @@ if (buehne && window.WebGLRenderingContext) {
         s.position.copy(anker[schluessel]);
         s.scale.setScalar(0.075);
         s.renderOrder = 3;
-        s.userData.dialog = punktDialog[schluessel];
-        s.userData.schluessel = schluessel;
+        s.userData.zone = schluessel;
         szene.add(s);
         sprites[schluessel] = s;
       });
 
+      // Aktive Zone golden markieren (persistent), Hover nur temporär
+      let aktiveZone = null;
+      function darstellen(schluessel, aktiv) {
+        const s = sprites[schluessel];
+        if (!s) return;
+        s.material.map = aktiv ? texGold : texGruen;
+        s.scale.setScalar(aktiv ? 0.10 : 0.075);
+      }
+      function markiere(zone) {
+        aktiveZone = zone;
+        Object.keys(sprites).forEach((k) => darstellen(k, k === zone));
+      }
+      document.addEventListener('kb-thema', (ev) => markiere(ev.detail));
+
       // Karte <-> Punkt Hover-Kopplung (Karten haben data-zone)
       document.querySelectorAll('.kb-karte[data-zone]').forEach((karte) => {
-        const s = sprites[karte.getAttribute('data-zone')];
-        if (!s) return;
-        karte.addEventListener('mouseenter', () => { s.material.map = texGold; s.scale.setScalar(0.10); });
-        karte.addEventListener('mouseleave', () => { s.material.map = texGruen; s.scale.setScalar(0.075); });
+        const zone = karte.getAttribute('data-zone');
+        if (!sprites[zone]) return;
+        karte.addEventListener('mouseenter', () => darstellen(zone, true));
+        karte.addEventListener('mouseleave', () => darstellen(zone, zone === aktiveZone));
       });
 
       // SVG-Fallback gegen Canvas tauschen — frischer Klon entfernt die alten Drag-Listener der 2D-Bühne
@@ -168,14 +187,13 @@ if (buehne && window.WebGLRenderingContext) {
       renderer.domElement.addEventListener('pointermove', (ev) => {
         if (Math.abs(ev.clientX - startX) + Math.abs(ev.clientY - startY) > 7) bewegt = true;
         const ziel = trefferSuchen(ev);
-        renderer.domElement.style.cursor = (ziel && ziel.userData.dialog) ? 'pointer' : 'grab';
+        renderer.domElement.style.cursor = (ziel && ziel.userData.zone) ? 'pointer' : 'grab';
       });
       renderer.domElement.addEventListener('click', (ev) => {
         if (bewegt) return;
         const ziel = trefferSuchen(ev);
-        if (ziel && ziel.userData.dialog) {
-          const dlg = document.getElementById(ziel.userData.dialog);
-          if (dlg && dlg.showModal) dlg.showModal();
+        if (ziel && ziel.userData.zone && window.kbZeigeThema) {
+          window.kbZeigeThema(ziel.userData.zone, true);
         }
       });
 
@@ -187,6 +205,6 @@ if (buehne && window.WebGLRenderingContext) {
 
       const hinweis = document.querySelector('.kb-hinweis');
       if (hinweis && buehne.getAttribute('data-hinweis')) hinweis.textContent = buehne.getAttribute('data-hinweis');
-    }, undefined, () => { /* Laden fehlgeschlagen -> SVG-Fallback bleibt */ });
+    }, undefined, (fehler) => { console.error('koerper-viewer:', fehler); /* SVG-Fallback bleibt */ });
   }
 }
