@@ -184,15 +184,43 @@ if (buehne && window.WebGLRenderingContext) {
       }
 
       renderer.domElement.addEventListener('pointerdown', (ev) => { bewegt = false; startX = ev.clientX; startY = ev.clientY; });
+
+      // Hover auf einen grünen Punkt: Karte aufblenden; beim Verlassen (mit kurzer Gnadenfrist) wieder schließen
+      let hoverZone = null, hoverTimer = null;
+      function hoverSchliessen() {
+        const alte = hoverZone;
+        hoverZone = null;
+        if (hoverTimer) clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(() => {
+          if (!hoverZone && alte && window.kbZeigeThema) {
+            window.kbZeigeThema(alte, false);
+            markiere(null);
+          }
+        }, 350);
+      }
       renderer.domElement.addEventListener('pointermove', (ev) => {
         if (Math.abs(ev.clientX - startX) + Math.abs(ev.clientY - startY) > 7) bewegt = true;
         const ziel = trefferSuchen(ev);
         renderer.domElement.style.cursor = (ziel && ziel.userData.zone) ? 'pointer' : 'grab';
+        const zone = (ziel && ziel.isSprite) ? ziel.userData.zone : null;
+        if (zone === hoverZone) return;
+        if (zone) {
+          if (hoverTimer) { clearTimeout(hoverTimer); hoverTimer = null; }
+          hoverZone = zone;
+          if (window.kbZeigeThema) window.kbZeigeThema(zone, true, false);
+          markiere(zone);
+        } else if (hoverZone) {
+          hoverSchliessen();
+        }
       });
+      renderer.domElement.addEventListener('pointerleave', () => { if (hoverZone) hoverSchliessen(); });
+
       renderer.domElement.addEventListener('click', (ev) => {
         if (bewegt) return;
         const ziel = trefferSuchen(ev);
         if (ziel && ziel.userData.zone && window.kbZeigeThema) {
+          if (hoverTimer) { clearTimeout(hoverTimer); hoverTimer = null; }
+          hoverZone = ziel.isSprite ? ziel.userData.zone : hoverZone;
           window.kbZeigeThema(ziel.userData.zone, true);
         }
       });

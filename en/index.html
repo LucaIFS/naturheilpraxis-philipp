@@ -299,7 +299,7 @@
           if (!abschnitt) return;
 
           var MEHR = 'Learn more →', WENIGER = 'Show less ↑';
-          function kbZeigeThema(zone, aufklappen){
+          function kbZeigeThema(zone, aufklappen, scrollen){
             abschnitt.querySelectorAll('.kb-karte[data-zone]').forEach(function(k){
               if (k.getAttribute('data-zone') === zone) return;
               k.classList.remove('kb-offen');
@@ -317,7 +317,7 @@
             if (btn) btn.textContent = offen ? WENIGER : MEHR;
             karte.setAttribute('aria-expanded', String(offen));
             if (offen) {
-              karte.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              if (scrollen !== false) karte.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
               document.dispatchEvent(new CustomEvent('kb-thema', { detail: zone }));
             }
           }
@@ -378,7 +378,7 @@
           buehne.addEventListener('pointercancel', loslassen);
         })();
       </script>
-      <script type="module" src="../assets/3d/koerper-viewer.js?v=3"></script>
+      <script type="module" src="../assets/3d/koerper-viewer.js?v=4"></script>
     </section>
 
     <!-- ===== Pointer to the children's section ===== -->
