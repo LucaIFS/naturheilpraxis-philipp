@@ -18,6 +18,7 @@
   <link rel="alternate" hreflang="en" href="https://www.naturheilpraxis-philipp.de/en/">
   <link rel="icon" href="assets/logo.svg?v=2" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css?v=25">
+  <script type="importmap">{ "imports": { "three": "./assets/3d/three.module.min.js" } }</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -168,7 +169,7 @@
             </article>
           </div>
           <div class="kb-mitte">
-            <div class="kb-buehne" id="kb-buehne">
+            <div class="kb-buehne" id="kb-buehne" data-basis="assets/3d/">
               <div class="kb-3d" id="kb-3d">
                 <svg viewBox="0 0 300 640" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <g stroke="none">
@@ -203,7 +204,8 @@
               </div>
             </div>
             <div class="kb-boden" aria-hidden="true"></div>
-            <p class="kb-hinweis">↔ Körper mit Maus oder Finger drehen · Punkt antippen für Details</p>
+            <p class="kb-hinweis">↔ Körper mit Maus oder Finger drehen · Punkt oder Organ antippen für Details</p>
+            <p style="text-align:center; font-size:0.68rem; color:var(--muted, #5c5c5c); margin-top:0.3rem;">3D-Modell: <a href="https://lifesciencedb.jp/bp3d/" target="_blank" rel="noopener" style="color:inherit;">BodyParts3D</a>, © The Database Center for Life Science, Lizenz CC&nbsp;BY-SA&nbsp;2.1&nbsp;JP (bearbeitet)</p>
           </div>
           <div class="kb-spalte">
             <article class="kb-karte" id="karte-ruecken" data-zone="ruecken">
@@ -370,6 +372,7 @@
           buehne.addEventListener('pointercancel', loslassen);
         })();
       </script>
+      <script type="module" src="assets/3d/koerper-viewer.js?v=1"></script>
     </section>
 
     <!-- ===== Hinweis auf den Kinder-Bereich ===== -->
