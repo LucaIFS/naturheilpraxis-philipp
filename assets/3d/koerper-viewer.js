@@ -98,7 +98,7 @@ if (buehne && window.WebGLRenderingContext) {
       if (meshes.herz)   anker.ruecken = mitte(meshes.herz).clone().setZ(-0.14);
       if (meshes.duenndarm) anker.ozon = mitte(meshes.duenndarm).add(new THREE.Vector3(0, 0, 0.08));
       anker.cholincitrat = new THREE.Vector3(0.30, -0.05, 0.04);
-      anker.krampfadern = new THREE.Vector3(0.12, -0.56, 0.06);
+      anker.krampfadern = new THREE.Vector3(-0.12, -0.56, 0.06); // linkes Bein — Punkt sitzt links, Linie kreuzt so nicht den Körper
 
       // Blutfluss: Partikel wandern entlang der Hauptschlagadern, Tempo pulsiert mit dem Herzschlag
       const herzP = meshes.herz ? meshes.herz.position.clone() : new THREE.Vector3(0, 0.28, 0);
@@ -123,15 +123,16 @@ if (buehne && window.WebGLRenderingContext) {
       });
 
       // Feste Punkte rund um den Körper (wie eine Uhr): links die Zonen der linken Karten, rechts die der rechten
+      // Punkt-Höhen an die jeweilige Körperstelle angeglichen, damit die Linien kurz bleiben und sich nicht kreuzen
       const uhr = [
         { zone: 'konzentration', seite: 'links',  top: 10 },
-        { zone: 'allergien',     seite: 'links',  top: 34 },
-        { zone: 'ozon',          seite: 'links',  top: 58 },
-        { zone: 'krampfadern',   seite: 'links',  top: 82 },
-        { zone: 'haut',          seite: 'rechts', top: 10 },
-        { zone: 'ruecken',       seite: 'rechts', top: 34 },
-        { zone: 'erschoepfung',  seite: 'rechts', top: 58 },
-        { zone: 'cholincitrat',  seite: 'rechts', top: 82 },
+        { zone: 'allergien',     seite: 'links',  top: 30 },
+        { zone: 'ozon',          seite: 'links',  top: 48 },
+        { zone: 'krampfadern',   seite: 'links',  top: 76 },
+        { zone: 'haut',          seite: 'rechts', top: 12 },
+        { zone: 'ruecken',       seite: 'rechts', top: 30 },
+        { zone: 'erschoepfung',  seite: 'rechts', top: 48 },
+        { zone: 'cholincitrat',  seite: 'rechts', top: 66 },
       ];
 
       // SVG-Fallback gegen Canvas + Overlay tauschen — frischer Klon entfernt die alten Drag-Listener der 2D-Bühne

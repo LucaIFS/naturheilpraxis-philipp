@@ -127,6 +127,10 @@
         .kb-detail p, .kb-detail li{ font-size:0.85rem; color:var(--ink, #2c2c2c); line-height:1.5; margin:0 0 0.5rem; }
         .kb-detail h4{ font-size:0.9rem; color:var(--green-800, #1e4d33); margin:0.6rem 0 0.3rem; }
         .kb-detail ul{ padding-left:1.1rem; margin:0.3rem 0 0.5rem; }
+        .kb-mobil{ position:relative; background:#fff; border:1px solid var(--gold, #c9a24b); border-radius:14px; padding:1.05rem 2.2rem 1.05rem 1.2rem; margin:0.9rem auto 0; max-width:540px; box-shadow:0 8px 22px rgba(20,46,33,0.14); }
+        .kb-mobil .kb-kopf{ margin-bottom:0.5rem; }
+        @media (min-width: 980px){ .kb-mobil{ display:none !important; } }
+        @media (max-width: 979px){ #schwerpunkte .kb-punkt{ width:26px; height:26px; } }
         .kb-buehne{ perspective:1000px; width:min(380px, 80vw); margin:0 auto; cursor:grab; touch-action:pan-y; user-select:none; -webkit-user-select:none; }
         .kb-buehne:active{ cursor:grabbing; }
         .kb-3d{ position:relative; transform-style:preserve-3d; animation:kb-dreh 10s ease-in-out infinite alternate; }
@@ -245,6 +249,7 @@
               </div>
             </div>
             <div class="kb-boden" aria-hidden="true"></div>
+            <div class="kb-mobil" id="kb-mobil" hidden></div>
             <p class="kb-hinweis">↔ Rotate the body with your mouse or finger · tap a dot or organ for details</p>
             <p style="text-align:center; font-size:0.68rem; color:var(--muted, #5c5c5c); margin-top:0.3rem;">3D model: <a href="https://lifesciencedb.jp/bp3d/" target="_blank" rel="noopener" style="color:inherit;">BodyParts3D</a>, © The Database Center for Life Science, licence CC&nbsp;BY-SA&nbsp;2.1&nbsp;JP (modified)</p>
           </div>
@@ -301,26 +306,58 @@
 
           var MEHR = 'Learn more →', WENIGER = 'Show less ↑';
           function kbZeigeThema(zone, aufklappen, scrollen){
+            var panel = document.getElementById('kb-mobil');
+            var mobil = panel && window.matchMedia && window.matchMedia('(max-width: 979px)').matches;
+            function panelSchliessen(){
+              if (!panel || panel.hidden) return;
+              var altZone = panel.getAttribute('data-zone');
+              var altDet = panel.querySelector('.kb-detail');
+              if (altZone && altDet) {
+                var altKarte = abschnitt.querySelector('.kb-karte[data-zone="' + altZone + '"]');
+                if (altKarte) { altDet.hidden = true; altKarte.appendChild(altDet); }
+                altKarte && altKarte.classList.remove('kb-offen');
+              }
+              panel.hidden = true;
+              panel.setAttribute('data-zone', '');
+              while (panel.firstChild) panel.removeChild(panel.firstChild);
+            }
             abschnitt.querySelectorAll('.kb-karte[data-zone]').forEach(function(k){
               if (k.getAttribute('data-zone') === zone) return;
               k.classList.remove('kb-offen');
               var d = k.querySelector('.kb-detail'); if (d) d.hidden = true;
-              var b = k.querySelector('.kb-mehr'); if (b) b.textContent = MEHR;
               k.setAttribute('aria-expanded', 'false');
             });
             var karte = abschnitt.querySelector('.kb-karte[data-zone="' + zone + '"]');
             if (!karte) return;
             var det = karte.querySelector('.kb-detail');
-            var btn = karte.querySelector('.kb-mehr');
-            var offen = (aufklappen === undefined) ? det.hidden : aufklappen;
-            det.hidden = !offen;
-            karte.classList.toggle('kb-offen', offen);
-            if (btn) btn.textContent = offen ? WENIGER : MEHR;
-            karte.setAttribute('aria-expanded', String(offen));
-            if (offen) {
-              if (scrollen !== false) karte.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-              document.dispatchEvent(new CustomEvent('kb-thema', { detail: zone }));
+            if (!det && panel && panel.getAttribute('data-zone') === zone) det = panel.querySelector('.kb-detail');
+            if (!det) return;
+            var istOffen = mobil ? (!panel.hidden && panel.getAttribute('data-zone') === zone) : !det.hidden;
+            var offen = (aufklappen === undefined) ? !istOffen : aufklappen;
+            panelSchliessen();
+            if (mobil && offen) {
+              var x = document.createElement('button');
+              x.className = 'kb-schliessen';
+              x.setAttribute('aria-label', 'Close');
+              x.innerHTML = '&times;';
+              x.addEventListener('click', panelSchliessen);
+              panel.appendChild(x);
+              var kopf = karte.querySelector('.kb-kopf');
+              if (kopf) panel.appendChild(kopf.cloneNode(true));
+              panel.appendChild(det);
+              det.hidden = false;
+              panel.setAttribute('data-zone', zone);
+              panel.hidden = false;
+              karte.classList.add('kb-offen');
+              karte.setAttribute('aria-expanded', 'true');
+              if (scrollen !== false) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else if (!mobil) {
+              det.hidden = !offen;
+              karte.classList.toggle('kb-offen', offen);
+              karte.setAttribute('aria-expanded', String(offen));
+              if (offen && scrollen !== false) karte.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
+            if (offen) document.dispatchEvent(new CustomEvent('kb-thema', { detail: zone }));
           }
           window.kbZeigeThema = kbZeigeThema;
           abschnitt.querySelectorAll('[data-zone-toggle]').forEach(function(b){
@@ -379,7 +416,7 @@
           buehne.addEventListener('pointercancel', loslassen);
         })();
       </script>
-      <script type="module" src="../assets/3d/koerper-viewer.js?v=6"></script>
+      <script type="module" src="../assets/3d/koerper-viewer.js?v=7"></script>
     </section>
 
     <!-- ===== Pointer to the children's section ===== -->
