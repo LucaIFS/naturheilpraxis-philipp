@@ -135,18 +135,31 @@ if (buehne && window.WebGLRenderingContext) {
         { zone: 'cholincitrat',  seite: 'rechts', top: 66 },
       ];
 
-      // SVG-Fallback gegen Canvas + Overlay tauschen — frischer Klon entfernt die alten Drag-Listener der 2D-Bühne
-      const halter = buehne.cloneNode(false);
+      // SVG-Fallback weich gegen Canvas überblenden — tiefer Klon entfernt die alten
+      // Drag-Listener der 2D-Bühne, behält aber die Illustration für den Übergang
+      const halter = buehne.cloneNode(true);
       buehne.replaceWith(halter);
       halter.style.position = 'relative';
+      const fallbackFigur = halter.querySelector('.kb-3d');
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      halter.appendChild(renderer.domElement);
+      const leinwand = renderer.domElement;
+      leinwand.style.position = 'absolute';
+      leinwand.style.left = '0';
+      leinwand.style.top = '0';
+      leinwand.style.opacity = '0';
+      leinwand.style.transition = 'opacity 0.5s ease';
+      halter.appendChild(leinwand);
+
+      // UI-Ebene (Linien + Uhr-Punkte) blendet gemeinsam mit dem Canvas ein
+      const ui = document.createElement('div');
+      ui.style.cssText = 'position:absolute; inset:0; opacity:0; transition:opacity 0.5s ease; pointer-events:none;';
+      halter.appendChild(ui);
 
       // Overlay für Verbindungslinien
       const svgNS = 'http://www.w3.org/2000/svg';
       const overlay = document.createElementNS(svgNS, 'svg');
       overlay.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; pointer-events:none;';
-      halter.appendChild(overlay);
+      ui.appendChild(overlay);
       const linien = {}, ankerPunkte = {};
       uhr.forEach((u) => {
         const l = document.createElementNS(svgNS, 'line');
@@ -184,7 +197,8 @@ if (buehne && window.WebGLRenderingContext) {
         }
         const karte = document.querySelector('.kb-karte[data-zone="' + u.zone + '"] h3');
         if (karte) { b.title = karte.textContent; b.setAttribute('aria-label', karte.textContent); }
-        halter.appendChild(b);
+        b.style.pointerEvents = 'auto';
+        ui.appendChild(b);
         punkte[u.zone] = b;
         b.addEventListener('mouseenter', () => {
           oeffnen(u.zone, false);
@@ -222,7 +236,32 @@ if (buehne && window.WebGLRenderingContext) {
         kamera.aspect = w / h;
         kamera.updateProjectionMatrix();
       };
-      groesse();
+      // Weicher Übergang: Höhe animiert von der Illustration zur Canvas-Größe,
+      // Illustration blendet aus, Canvas + Punkte blenden ein
+      const startHoehe = fallbackFigur ? fallbackFigur.getBoundingClientRect().height : halter.clientHeight;
+      halter.style.height = Math.round(startHoehe) + 'px';
+      let eingeblendet = false;
+      function einblenden() {
+        if (eingeblendet) return;
+        eingeblendet = true;
+        halter.style.transition = 'height 0.5s ease';
+        groesse();
+        if (fallbackFigur) { fallbackFigur.style.transition = 'opacity 0.35s ease'; fallbackFigur.style.opacity = '0'; }
+        leinwand.style.opacity = '1';
+        ui.style.opacity = '1';
+        setTimeout(() => {
+          if (fallbackFigur) fallbackFigur.remove();
+          halter.style.transition = '';
+          // Endzustand hart setzen — falls die Transition nie lief (versteckter Tab)
+          leinwand.style.transition = 'none';
+          leinwand.style.opacity = '1';
+          ui.style.transition = 'none';
+          ui.style.opacity = '1';
+        }, 550);
+      }
+      // rAF für flüssiges Timing — Timeout als Absicherung für versteckte/vorgerenderte Tabs
+      requestAnimationFrame(einblenden);
+      setTimeout(einblenden, 400);
       window.addEventListener('resize', groesse);
 
       const steuerung = new OrbitControls(kamera, renderer.domElement);
