@@ -282,9 +282,14 @@ if (buehne && window.WebGLRenderingContext) {
       steuerung.autoRotate = false; // Figur steht fix — Drehen nur per Maus/Finger
       steuerung.minAzimuthAngle = -Math.PI / 2; // maximal bis zur Seitenansicht links …
       steuerung.maxAzimuthAngle = Math.PI / 2;  // … und rechts — keine volle Drehung, Rückseite nie sichtbar
-      steuerung.minPolarAngle = Math.PI * 0.35;
-      steuerung.maxPolarAngle = Math.PI * 0.62;
       steuerung.target.set(0, 0, 0);
+      // Vertikale Achse komplett fixiert: nur seitliches Drehen moeglich
+      const polarFix = steuerung.getPolarAngle();
+      steuerung.minPolarAngle = polarFix;
+      steuerung.maxPolarAngle = polarFix;
+      // OrbitControls setzt touch-action:none — zuruecksetzen, damit vertikales
+      // Wischen auf dem Handy die Seite scrollt statt an der Figur haengen zu bleiben
+      renderer.domElement.style.touchAction = 'pan-y';
 
       // Nach dem Loslassen kehrt die Figur nach kurzer Ruhe sanft zur Frontansicht zurück
       let interagiert = false, ruheSeit = 0;
