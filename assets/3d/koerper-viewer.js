@@ -7,6 +7,17 @@ import { OrbitControls } from './OrbitControls.js?v=1';
 
 const buehne = document.getElementById('kb-buehne');
 if (buehne && window.WebGLRenderingContext) {
+  // Solange das 3D-Modell laedt, zeigt die gezeichnete Figur einen bewusst
+  // unscharfen "Lade-Geist" - so wirkt der Wechsel wie Scharfstellen, nicht wie ein Fehler.
+  const geist = buehne.querySelector('.kb-3d');
+  if (geist) {
+    geist.style.filter = 'blur(5px) saturate(0.7)';
+    geist.style.opacity = '0.45';
+    geist.style.transition = 'filter 0.4s ease, opacity 0.4s ease';
+  }
+  function geistZuruecksetzen() {
+    if (geist) { geist.style.filter = ''; geist.style.opacity = ''; }
+  }
   const basis = buehne.getAttribute('data-basis') || 'assets/3d/';
   // Lazy-Start, sobald die Bühne in Sichtweite kommt — bewusst ohne IntersectionObserver,
   // der in manchen Umgebungen (versteckte Tabs, Prerender) nie feuert.
@@ -32,6 +43,7 @@ if (buehne && window.WebGLRenderingContext) {
     try {
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     } catch (err) {
+      geistZuruecksetzen();
       return; // WebGL nicht verfügbar -> SVG-Fallback bleibt stehen
     }
 
@@ -369,6 +381,6 @@ if (buehne && window.WebGLRenderingContext) {
         renderer.render(szene, kamera);
       })();
 
-    }, undefined, (fehler) => { console.error('koerper-viewer:', fehler); /* SVG-Fallback bleibt */ });
+    }, undefined, (fehler) => { console.error('koerper-viewer:', fehler); geistZuruecksetzen(); /* SVG-Fallback bleibt */ });
   }
 }
