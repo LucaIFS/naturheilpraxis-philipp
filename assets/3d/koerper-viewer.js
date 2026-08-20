@@ -2,8 +2,8 @@
 // Modell: BodyParts3D, (c) The Database Center for Life Science,
 // lizenziert unter CC Attribution-Share Alike 2.1 Japan.
 import * as THREE from 'three';
-import { GLTFLoader } from './GLTFLoader.js';
-import { OrbitControls } from './OrbitControls.js';
+import { GLTFLoader } from './GLTFLoader.js?v=1';
+import { OrbitControls } from './OrbitControls.js?v=1';
 
 const buehne = document.getElementById('kb-buehne');
 if (buehne && window.WebGLRenderingContext) {
@@ -278,7 +278,6 @@ if (buehne && window.WebGLRenderingContext) {
       let interagiert = false, ruheSeit = 0;
       steuerung.addEventListener('start', () => { interagiert = true; sofortDrehen = false; });
       steuerung.addEventListener('end', () => { interagiert = false; ruheSeit = 0; });
-      window.kbAzimut = () => steuerung.getAzimuthalAngle();
 
       // Organ-Klick per Raycast (Punkte sind jetzt HTML und brauchen keinen Raycast)
       const strahl = new THREE.Raycaster();
@@ -316,7 +315,6 @@ if (buehne && window.WebGLRenderingContext) {
           proj.copy(a).project(kamera);
           const x2 = (proj.x * 0.5 + 0.5) * w;
           const y2 = (-proj.y * 0.5 + 0.5) * h;
-          const p = punkte[u.zone];
           const x1 = (u.seite === 'links' ? 0.03 : 0.97) * w;
           const y1 = (u.top / 100) * h;
           const l = linien[u.zone], c = ankerPunkte[u.zone];
@@ -371,8 +369,6 @@ if (buehne && window.WebGLRenderingContext) {
         renderer.render(szene, kamera);
       })();
 
-      const hinweis = document.querySelector('.kb-hinweis');
-      if (hinweis && buehne.getAttribute('data-hinweis')) hinweis.textContent = buehne.getAttribute('data-hinweis');
     }, undefined, (fehler) => { console.error('koerper-viewer:', fehler); /* SVG-Fallback bleibt */ });
   }
 }

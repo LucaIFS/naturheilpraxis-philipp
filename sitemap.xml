@@ -14,4 +14,8 @@
   <url><loc>https://www.naturheilpraxis-philipp.de/en/videos.html</loc><priority>0.5</priority></url>
   <url><loc>https://www.naturheilpraxis-philipp.de/en/kontakt.html</loc><priority>0.7</priority></url>
   <url><loc>https://www.naturheilpraxis-philipp.de/en/gesundheitstests.html</loc><priority>0.7</priority></url>
+  <url><loc>https://www.naturheilpraxis-philipp.de/impressum.html</loc><priority>0.3</priority></url>
+  <url><loc>https://www.naturheilpraxis-philipp.de/datenschutz.html</loc><priority>0.3</priority></url>
+  <url><loc>https://www.naturheilpraxis-philipp.de/en/impressum.html</loc><priority>0.3</priority></url>
+  <url><loc>https://www.naturheilpraxis-philipp.de/en/datenschutz.html</loc><priority>0.3</priority></url>
 </urlset>

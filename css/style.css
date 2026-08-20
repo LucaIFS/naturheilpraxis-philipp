@@ -72,7 +72,6 @@ a { color: var(--green-800); }
   line-height: 1.2;
 }
 .nav-logo .logo-img { height: 54px; width: auto; }
-.nav-logo-text { display: flex; flex-direction: column; }
 .nav-logo strong { font-family: var(--font-head); font-size: 1.15rem; letter-spacing: 0.02em; }
 .nav-logo span {
   font-size: 0.72rem;
@@ -172,17 +171,6 @@ a { color: var(--green-800); }
 }
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
 
-.photo-placeholder {
-  width: 100%; height: 100%;
-  display: grid; place-items: center;
-  text-align: center;
-  font-family: var(--font-head);
-  font-size: 1.2rem;
-  color: var(--muted);
-  border: 2px dashed var(--line);
-  border-radius: var(--radius);
-}
-
 /* ===== Trust-Leiste ===== */
 .trustbar { border-block: 1px solid var(--line); background: #fff; }
 .trustbar-inner {
@@ -267,39 +255,6 @@ a { color: var(--green-800); }
 .card p { color: var(--muted); font-size: 0.95rem; flex-grow: 1; }
 .card a { font-weight: 600; text-decoration: none; font-size: 0.92rem; }
 .card a:hover { text-decoration: underline; }
-
-/* Aufklappbare Karten: Desktop per Hover, Mobile/Tastatur per Tipp bzw. Enter */
-.card.expandable { cursor: pointer; }
-
-.card-details {
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  transition: max-height 0.45s ease, opacity 0.35s ease, margin-top 0.45s ease;
-  margin-top: 0;
-  flex-grow: 0;
-}
-.card-details p, .card-details li { color: var(--ink); font-size: 0.92rem; flex-grow: 0; }
-.card-details p { margin-bottom: 0.7rem; }
-.card-details h4 { color: var(--green-800); font-size: 0.95rem; margin: 0.9rem 0 0.35rem; }
-.card-details ul { margin: 0 0 0.7rem 1.15rem; }
-
-.card-more {
-  color: var(--green-600);
-  font-weight: 600;
-  font-size: 0.88rem;
-  margin-top: 0.5rem;
-  flex-grow: 0 !important;
-  transition: opacity 0.2s ease;
-}
-
-.card.expandable.open .card-details { max-height: 1200px; opacity: 1; margin-top: 0.6rem; }
-.card.expandable.open .card-more { opacity: 0; height: 0; margin: 0; overflow: hidden; }
-
-@media (hover: hover) {
-  .card.expandable:hover .card-details { max-height: 1200px; opacity: 1; margin-top: 0.6rem; }
-  .card.expandable:hover .card-more { opacity: 0; height: 0; margin: 0; overflow: hidden; }
-}
 
 .card-icon {
   width: 4.2rem; height: 4.2rem;
@@ -877,6 +832,10 @@ a.partner-logo:focus-visible {
   .spotlight-icon { width: 76px; height: 76px; }
 }
 
+/* =====================================================================
+   GEPARKT: Styles fuer Webinar-Terminliste und Mitgliederbereich.
+   Werden reaktiviert, sobald Termine bzw. der Mitgliederbereich live gehen.
+   ===================================================================== */
 /* ===== Termin-Liste (buchbare Live-Webinare) ===== */
 .termin-liste { display: grid; gap: 1rem; margin-top: 1.4rem; }
 

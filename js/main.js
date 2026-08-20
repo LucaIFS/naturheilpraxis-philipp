@@ -21,27 +21,6 @@ if (toggle && links) {
   });
 }
 
-// Aufklappbare Schwerpunkt-Karten: Tipp/Klick (Mobile) und Enter (Tastatur)
-// — auf Hover-Geräten übernimmt das CSS zusätzlich das Aufklappen.
-document.querySelectorAll('.card.expandable').forEach((card) => {
-  card.setAttribute('role', 'button');
-  card.setAttribute('aria-expanded', 'false');
-  const toggle = () => {
-    const open = card.classList.toggle('open');
-    card.setAttribute('aria-expanded', String(open));
-  };
-  card.addEventListener('click', (e) => {
-    if (e.target.closest('a')) return;
-    toggle();
-  });
-  card.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggle();
-    }
-  });
-});
-
 // Sanfte Einblendungen beim Scrollen (respektiert prefers-reduced-motion)
 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
   const targets = document.querySelectorAll('.card, .trustbar-item, .video-link, .testimonial, .therapy, .video-embed, .quote');
@@ -54,9 +33,8 @@ if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'Intersect
     });
   }, { threshold: 0.15 });
   targets.forEach((t) => {
-    // Elemente in noch versteckten Bereichen (z. B. Mitgliederbereich vor dem
-    // Login) auslassen: Sie würden sonst dauerhaft unsichtbar bleiben, weil
-    // der Beobachter sie nach dem Einblenden nicht mehr meldet.
+    // Elemente in versteckten Bereichen auslassen: Sie würden sonst dauerhaft
+    // unsichtbar bleiben, weil der Beobachter sie nicht mehr meldet.
     if (!t.offsetParent) return;
     t.classList.add('reveal');
     io.observe(t);
