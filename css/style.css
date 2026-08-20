@@ -832,6 +832,15 @@ a.partner-logo:focus-visible {
   .spotlight-icon { width: 76px; height: 76px; }
 }
 
+/* Patientenstimmen als Aufklapper: Sterne + Name sichtbar, Text auf Klick */
+details.testimonial summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 0.7rem; }
+details.testimonial summary::-webkit-details-marker { display: none; }
+details.testimonial summary .stars { margin-bottom: 0; }
+details.testimonial .t-name { font-weight: 600; color: var(--green-950); }
+details.testimonial .t-plus { margin-left: auto; color: var(--green-600); font-weight: 700; font-size: 1.2rem; line-height: 1; transition: transform 0.2s ease; }
+details.testimonial[open] .t-plus { transform: rotate(45deg); }
+details.testimonial[open] summary { margin-bottom: 0.7rem; }
+
 /* =====================================================================
    GEPARKT: Styles fuer Webinar-Terminliste und Mitgliederbereich.
    Werden reaktiviert, sobald Termine bzw. der Mitgliederbereich live gehen.
