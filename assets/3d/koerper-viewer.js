@@ -208,6 +208,8 @@ if (buehne && window.WebGLRenderingContext) {
       steuerung.enableZoom = false;
       steuerung.enablePan = false;
       steuerung.autoRotate = false; // Figur steht fix — Drehen nur per Maus/Finger
+      steuerung.minAzimuthAngle = -Math.PI / 2; // maximal bis zur Seitenansicht links …
+      steuerung.maxAzimuthAngle = Math.PI / 2;  // … und rechts — keine volle Drehung, Rückseite nie sichtbar
       steuerung.minPolarAngle = Math.PI * 0.35;
       steuerung.maxPolarAngle = Math.PI * 0.62;
       steuerung.target.set(0, 0, 0);
