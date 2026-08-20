@@ -166,6 +166,8 @@ if (buehne && window.WebGLRenderingContext) {
         ruecken: 'icon-ruecken.svg', haut: 'icon-haut.svg',
         erschoepfung: 'icon-burnout.svg', cholincitrat: 'icon-cholincitrat.svg',
       };
+      // Ziel-Drehung: Hover auf einen Punkt dreht den Körper sanft zur jeweiligen Seite mit
+      let zielAzimut = 0, sofortDrehen = false;
       const punkte = {};
       uhr.forEach((u) => {
         const b = document.createElement('button');
@@ -184,7 +186,12 @@ if (buehne && window.WebGLRenderingContext) {
         if (karte) { b.title = karte.textContent; b.setAttribute('aria-label', karte.textContent); }
         halter.appendChild(b);
         punkte[u.zone] = b;
-        b.addEventListener('mouseenter', () => { oeffnen(u.zone, false); });
+        b.addEventListener('mouseenter', () => {
+          oeffnen(u.zone, false);
+          zielAzimut = (u.seite === 'rechts' ? 0.7 : -0.7);
+          sofortDrehen = true;
+        });
+        b.addEventListener('mouseleave', () => { zielAzimut = 0; sofortDrehen = true; });
         b.addEventListener('click', (e) => { e.stopPropagation(); oeffnen(u.zone, true); });
       });
 
@@ -230,8 +237,9 @@ if (buehne && window.WebGLRenderingContext) {
 
       // Nach dem Loslassen kehrt die Figur nach kurzer Ruhe sanft zur Frontansicht zurück
       let interagiert = false, ruheSeit = 0;
-      steuerung.addEventListener('start', () => { interagiert = true; });
+      steuerung.addEventListener('start', () => { interagiert = true; sofortDrehen = false; });
       steuerung.addEventListener('end', () => { interagiert = false; ruheSeit = 0; });
+      window.kbAzimut = () => steuerung.getAzimuthalAngle();
 
       // Organ-Klick per Raycast (Punkte sind jetzt HTML und brauchen keinen Raycast)
       const strahl = new THREE.Raycaster();
@@ -304,13 +312,15 @@ if (buehne && window.WebGLRenderingContext) {
           const b = blut[i];
           b.mesh.position.copy(b.kurve.getPoint((b.phase + flussPos) % 1));
         }
-        // Sanfte Rückkehr zur Frontansicht nach 4 s ohne Interaktion
+        // Sanfte Drehung zum Zielwinkel: Punkt-Hover dreht zur Seite, sonst zurück zur Front
+        // (nach manuellem Ziehen erst nach 4 s Ruhe)
         if (!interagiert) {
           ruheSeit += dt;
           const az = steuerung.getAzimuthalAngle();
-          if (ruheSeit > 4 && Math.abs(az) > 0.005) {
+          const diff = az - zielAzimut;
+          if ((sofortDrehen || ruheSeit > 4) && Math.abs(diff) > 0.005) {
             steuerung.autoRotate = true;
-            steuerung.autoRotateSpeed = Math.max(-8, Math.min(8, -az * 12));
+            steuerung.autoRotateSpeed = Math.max(-4.5, Math.min(4.5, diff * 5));
           } else {
             steuerung.autoRotate = false;
           }
