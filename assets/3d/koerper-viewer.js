@@ -207,11 +207,15 @@ if (buehne && window.WebGLRenderingContext) {
       const steuerung = new OrbitControls(kamera, renderer.domElement);
       steuerung.enableZoom = false;
       steuerung.enablePan = false;
-      steuerung.autoRotate = true;
-      steuerung.autoRotateSpeed = 1.1;
+      steuerung.autoRotate = false; // Figur steht fix — Drehen nur per Maus/Finger
       steuerung.minPolarAngle = Math.PI * 0.35;
       steuerung.maxPolarAngle = Math.PI * 0.62;
       steuerung.target.set(0, 0, 0);
+
+      // Nach dem Loslassen kehrt die Figur nach kurzer Ruhe sanft zur Frontansicht zurück
+      let interagiert = false, ruheSeit = 0;
+      steuerung.addEventListener('start', () => { interagiert = true; });
+      steuerung.addEventListener('end', () => { interagiert = false; ruheSeit = 0; });
 
       // Organ-Klick per Raycast (Punkte sind jetzt HTML und brauchen keinen Raycast)
       const strahl = new THREE.Raycaster();
@@ -283,6 +287,19 @@ if (buehne && window.WebGLRenderingContext) {
         for (let i = 0; i < blut.length; i++) {
           const b = blut[i];
           b.mesh.position.copy(b.kurve.getPoint((b.phase + flussPos) % 1));
+        }
+        // Sanfte Rückkehr zur Frontansicht nach 4 s ohne Interaktion
+        if (!interagiert) {
+          ruheSeit += dt;
+          const az = steuerung.getAzimuthalAngle();
+          if (ruheSeit > 4 && Math.abs(az) > 0.005) {
+            steuerung.autoRotate = true;
+            steuerung.autoRotateSpeed = Math.max(-8, Math.min(8, -az * 12));
+          } else {
+            steuerung.autoRotate = false;
+          }
+        } else {
+          steuerung.autoRotate = false;
         }
         steuerung.update();
         linienAktualisieren();
