@@ -130,7 +130,12 @@
         .kb-mobil{ position:relative; background:#fff; border:1px solid var(--gold, #c9a24b); border-radius:14px; padding:1.05rem 2.2rem 1.05rem 1.2rem; margin:0.9rem auto 0; max-width:540px; box-shadow:0 8px 22px rgba(20,46,33,0.14); }
         .kb-mobil .kb-kopf{ margin-bottom:0.5rem; }
         @media (min-width: 980px){ .kb-mobil{ display:none !important; } }
-        @media (max-width: 979px){ #schwerpunkte .kb-punkt{ width:26px; height:26px; } }
+        @media (max-width: 979px){
+          #schwerpunkte .kb-punkt{ width:36px; height:36px; background:#fff; border:2px solid var(--green-600, #2f7d4f); display:flex; align-items:center; justify-content:center; }
+          #schwerpunkte .kb-punkt img{ display:block; width:24px; height:24px; }
+          #schwerpunkte .kb-punkt:hover, #schwerpunkte .kb-punkt:focus-visible, #schwerpunkte .kb-punkt.kb-aktiv{ background:#fff; border-color:var(--gold, #c9a24b); box-shadow:0 0 0 6px rgba(201,162,75,0.25); animation:none; }
+        }
+        @media (min-width: 980px){ #schwerpunkte .kb-punkt img{ display:none; } }
         .kb-buehne{ perspective:1000px; width:min(380px, 80vw); margin:0 auto; cursor:grab; touch-action:pan-y; user-select:none; -webkit-user-select:none; }
         .kb-buehne:active{ cursor:grabbing; }
         .kb-3d{ position:relative; transform-style:preserve-3d; animation:kb-dreh 10s ease-in-out infinite alternate; }
@@ -238,14 +243,14 @@
                     </g>
                   </g>
                 </svg>
-                <button class="kb-punkt" style="left:50%; top:8%;" data-zone-punkt="konzentration" title="Konzentration &amp; ADS/ADHS" aria-label="Kopf: Konzentration und ADS/ADHS"></button>
-                <button class="kb-punkt" style="left:59%; top:11%;" data-zone-punkt="haut" title="Hauterkrankungen" aria-label="Haut: Hauterkrankungen"></button>
-                <button class="kb-punkt" style="left:64%; top:21%;" data-zone-punkt="ruecken" title="Rückenbeschwerden" aria-label="Rücken und Schulter: Rückenbeschwerden"></button>
-                <button class="kb-punkt" style="left:41%; top:30%;" data-zone-punkt="allergien" title="Allergien" aria-label="Atemwege: Allergien"></button>
-                <button class="kb-punkt" style="left:50%; top:29%;" data-zone-punkt="erschoepfung" title="Erschöpfung &amp; Burn-out" aria-label="Herz: Erschöpfung und Burn-out"></button>
-                <button class="kb-punkt" style="left:44%; top:43%;" data-zone-punkt="ozon" title="Ozon-Therapie" aria-label="Stoffwechsel: Ozon-Therapie"></button>
-                <button class="kb-punkt" style="left:74%; top:44%;" data-zone-punkt="cholincitrat" title="Cholincitrat-Infusionen" aria-label="Vene am Arm: Cholincitrat-Infusionen"></button>
-                <button class="kb-punkt" style="left:42%; top:83%;" data-zone-punkt="krampfadern" title="Krampfadern &amp; Besenreiser" aria-label="Bein: Krampfadern und Besenreiser"></button>
+                <button class="kb-punkt" style="left:50%; top:8%;" data-zone-punkt="konzentration" title="Konzentration &amp; ADS/ADHS" aria-label="Kopf: Konzentration und ADS/ADHS"><img src="assets/icon-kinder.svg?v=4" alt=""></button>
+                <button class="kb-punkt" style="left:59%; top:11%;" data-zone-punkt="haut" title="Hauterkrankungen" aria-label="Haut: Hauterkrankungen"><img src="assets/icon-haut.svg?v=4" alt=""></button>
+                <button class="kb-punkt" style="left:64%; top:21%;" data-zone-punkt="ruecken" title="Rückenbeschwerden" aria-label="Rücken und Schulter: Rückenbeschwerden"><img src="assets/icon-ruecken.svg?v=4" alt=""></button>
+                <button class="kb-punkt" style="left:41%; top:30%;" data-zone-punkt="allergien" title="Allergien" aria-label="Atemwege: Allergien"><img src="assets/icon-allergien.svg?v=4" alt=""></button>
+                <button class="kb-punkt" style="left:50%; top:29%;" data-zone-punkt="erschoepfung" title="Erschöpfung &amp; Burn-out" aria-label="Herz: Erschöpfung und Burn-out"><img src="assets/icon-burnout.svg?v=4" alt=""></button>
+                <button class="kb-punkt" style="left:44%; top:43%;" data-zone-punkt="ozon" title="Ozon-Therapie" aria-label="Stoffwechsel: Ozon-Therapie"><img src="assets/icon-ozon.svg?v=4" alt=""></button>
+                <button class="kb-punkt" style="left:74%; top:44%;" data-zone-punkt="cholincitrat" title="Cholincitrat-Infusionen" aria-label="Vene am Arm: Cholincitrat-Infusionen"><img src="assets/icon-cholincitrat.svg?v=4" alt=""></button>
+                <button class="kb-punkt" style="left:42%; top:83%;" data-zone-punkt="krampfadern" title="Krampfadern &amp; Besenreiser" aria-label="Bein: Krampfadern und Besenreiser"><img src="assets/icon-krampfadern.svg?v=4" alt=""></button>
               </div>
             </div>
             <div class="kb-boden" aria-hidden="true"></div>
@@ -419,7 +424,7 @@
           buehne.addEventListener('pointercancel', loslassen);
         })();
       </script>
-      <script type="module" src="assets/3d/koerper-viewer.js?v=9"></script>
+      <script type="module" src="assets/3d/koerper-viewer.js?v=10"></script>
     </section>
 
     <!-- ===== Hinweis auf den Kinder-Bereich ===== -->

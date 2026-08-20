@@ -158,6 +158,14 @@ if (buehne && window.WebGLRenderingContext) {
       });
 
       // Feste Uhr-Punkte als HTML-Buttons (stehen still -> Hover bleibt stabil)
+      // Auf Mobil zeigen die Punkte die farbigen Themen-Icons (per CSS eingeblendet)
+      const iconBasis = basis.replace('3d/', '');
+      const zonenIcons = {
+        konzentration: 'icon-kinder.svg', allergien: 'icon-allergien.svg',
+        ozon: 'icon-ozon.svg', krampfadern: 'icon-krampfadern.svg',
+        ruecken: 'icon-ruecken.svg', haut: 'icon-haut.svg',
+        erschoepfung: 'icon-burnout.svg', cholincitrat: 'icon-cholincitrat.svg',
+      };
       const punkte = {};
       uhr.forEach((u) => {
         const b = document.createElement('button');
@@ -166,6 +174,12 @@ if (buehne && window.WebGLRenderingContext) {
         b.style.top = u.top + '%';
         b.style.transform = 'translate(-50%,-50%)';
         b.setAttribute('data-zone-punkt', u.zone);
+        if (zonenIcons[u.zone]) {
+          const bild = document.createElement('img');
+          bild.src = iconBasis + zonenIcons[u.zone] + '?v=4';
+          bild.alt = '';
+          b.appendChild(bild);
+        }
         const karte = document.querySelector('.kb-karte[data-zone="' + u.zone + '"] h3');
         if (karte) { b.title = karte.textContent; b.setAttribute('aria-label', karte.textContent); }
         halter.appendChild(b);
