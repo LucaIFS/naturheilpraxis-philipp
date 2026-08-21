@@ -104,10 +104,10 @@ if (buehne && window.WebGLRenderingContext) {
       // Anatomische Anker (Ziel der Verbindungslinien) — drehen mit dem Körper mit
       const anker = {};
       if (meshes.gehirn) anker.konzentration = mitte(meshes.gehirn).add(new THREE.Vector3(0, 0.03, 0.02));
-      if (meshes.gehirn) anker.haut = mitte(meshes.gehirn).add(new THREE.Vector3(0.05, -0.13, 0.10));
+      if (meshes.gehirn) anker.haut = mitte(meshes.gehirn).add(new THREE.Vector3(0.16, -0.34, 0.05));
       if (meshes.lunge)  anker.allergien = mitte(meshes.lunge).add(new THREE.Vector3(-0.11, 0.02, 0.06));
       if (meshes.herz)   anker.erschoepfung = mitte(meshes.herz).add(new THREE.Vector3(0, 0, 0.06));
-      if (meshes.herz)   anker.ruecken = mitte(meshes.herz).clone().setZ(-0.14);
+      if (meshes.herz)   anker.ruecken = mitte(meshes.herz).clone().add(new THREE.Vector3(0, 0.10, 0)).setZ(-0.14);
       if (meshes.duenndarm) anker.ozon = mitte(meshes.duenndarm).add(new THREE.Vector3(0, 0, 0.08));
       anker.cholincitrat = new THREE.Vector3(0.30, -0.05, 0.04);
       anker.krampfadern = new THREE.Vector3(-0.12, -0.56, 0.06); // linkes Bein — Punkt sitzt links, Linie kreuzt so nicht den Körper
@@ -141,8 +141,8 @@ if (buehne && window.WebGLRenderingContext) {
         { zone: 'allergien',     seite: 'links',  top: 30 },
         { zone: 'ozon',          seite: 'links',  top: 48 },
         { zone: 'krampfadern',   seite: 'links',  top: 76 },
-        { zone: 'haut',          seite: 'rechts', top: 12 },
-        { zone: 'ruecken',       seite: 'rechts', top: 30 },
+        { zone: 'ruecken',       seite: 'rechts', top: 12 },
+        { zone: 'haut',          seite: 'rechts', top: 30 },
         { zone: 'erschoepfung',  seite: 'rechts', top: 48 },
         { zone: 'cholincitrat',  seite: 'rechts', top: 66 },
       ];
