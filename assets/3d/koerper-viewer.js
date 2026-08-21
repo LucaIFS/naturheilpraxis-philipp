@@ -107,7 +107,7 @@ if (buehne && window.WebGLRenderingContext) {
       if (meshes.gehirn) anker.haut = mitte(meshes.gehirn).add(new THREE.Vector3(0.16, -0.34, 0.05));
       if (meshes.lunge)  anker.allergien = mitte(meshes.lunge).add(new THREE.Vector3(-0.11, 0.02, 0.06));
       if (meshes.herz)   anker.erschoepfung = mitte(meshes.herz).add(new THREE.Vector3(0, 0, 0.06));
-      if (meshes.herz)   anker.ruecken = mitte(meshes.herz).clone().add(new THREE.Vector3(0, 0.10, 0)).setZ(-0.14);
+      if (meshes.herz)   anker.ruecken = mitte(meshes.herz).clone().add(new THREE.Vector3(0, 0.24, 0)).setZ(-0.12);
       if (meshes.duenndarm) anker.ozon = mitte(meshes.duenndarm).add(new THREE.Vector3(0, 0, 0.08));
       anker.cholincitrat = new THREE.Vector3(0.30, -0.05, 0.04);
       anker.krampfadern = new THREE.Vector3(-0.12, -0.56, 0.06); // linkes Bein — Punkt sitzt links, Linie kreuzt so nicht den Körper

@@ -110,7 +110,7 @@
       <style>
         #schwerpunkte .section-head{ text-align:center; max-width:680px; margin-left:auto; margin-right:auto; }
         .kb-layout{ display:grid; grid-template-columns:1fr; gap:1.3rem; align-items:center; margin-top:1.5rem; }
-        @media (min-width: 980px){ .kb-layout{ grid-template-columns:1fr minmax(300px, 410px) 1fr; gap:1.6rem; } }
+        @media (min-width: 980px){ .kb-layout{ grid-template-columns:1fr minmax(300px, 410px) 1fr; gap:1.6rem; align-items:stretch; } .kb-spalte{ align-content:space-evenly; } }
         .kb-mitte{ order:-1; }
         @media (min-width: 980px){ .kb-mitte{ order:0; } }
         .kb-spalte{ display:grid; gap:1rem; align-content:center; }
@@ -409,7 +409,7 @@
           buehne.addEventListener('pointercancel', loslassen);
         })();
       </script>
-      <script type="module" src="../assets/3d/koerper-viewer.js?v=17"></script>
+      <script type="module" src="../assets/3d/koerper-viewer.js?v=18"></script>
     </section>
 
     <!-- ===== Pointer to the children's section ===== -->
