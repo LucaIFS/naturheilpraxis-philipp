@@ -221,6 +221,35 @@ if (buehne && window.WebGLRenderingContext) {
         b.addEventListener('click', (e) => { e.stopPropagation(); oeffnen(u.zone, true); });
       });
 
+      // Punkte auf Kartenhoehe ausrichten (nur Desktop mit Seitenspalten):
+      // so ist sofort klar, welcher Punkt zu welcher Beschreibung gehoert —
+      // die Linie laeuft von der Kartenhoehe zur Koerperstelle. Mobil bleibt
+      // die feste Uhr-Anordnung. Reagiert auf Resize und Kartenauf-/zuklappen.
+      uhr.forEach((u) => { u.uhrTop = u.top; });
+      const desktopAbfrage = window.matchMedia('(min-width: 980px)');
+      function punkteAusrichten() {
+        const hr = halter.getBoundingClientRect();
+        if (!hr.height) return;
+        uhr.forEach((u) => {
+          let ziel = u.uhrTop;
+          if (desktopAbfrage.matches) {
+            const karte = document.querySelector('.kb-karte[data-zone="' + u.zone + '"]');
+            if (karte && karte.offsetParent) {
+              const kr = karte.getBoundingClientRect();
+              ziel = Math.min(94, Math.max(6, ((kr.top + kr.height / 2 - hr.top) / hr.height) * 100));
+            }
+          }
+          u.top = ziel;
+          punkte[u.zone].style.top = ziel + '%';
+        });
+      }
+      punkteAusrichten();
+      window.addEventListener('resize', punkteAusrichten);
+      if (window.ResizeObserver) {
+        const spaltenBeobachter = new ResizeObserver(punkteAusrichten);
+        document.querySelectorAll('.kb-spalte').forEach((sp) => spaltenBeobachter.observe(sp));
+      }
+
       let aktiveZone = null;
       function markiere(zone) {
         aktiveZone = zone;
